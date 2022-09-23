@@ -13,6 +13,7 @@ mongoose.connect(mongoURI, () => console.log(`MongoDB connected at ${mongoURI}`)
 app.use(express.json());
 
 //Routes
+app.use('/user', require('./routes/userRoutes'));
 
 
 
