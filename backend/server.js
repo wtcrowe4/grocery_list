@@ -13,8 +13,14 @@ mongoose.connect(mongoURI, () => console.log(`MongoDB connected at ${mongoURI}`)
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//Root Route
+app.get('/', (req, res) => {
+    res.send('Backend Root Route');
+});
+
 //Routes
 app.use('/api/user', require('./routes/userRoutes'));
+app.use('/api/list', require('./routes/listRoutes'));
 
 
 //Error Handling
