@@ -5,9 +5,11 @@ const userController = require('../controllers/userController');
 //Routes
 //Create a new user
 router.post('/register', userController.register);
-
-// router.post('/login', userController.login);
+//Login a user
+router.post('/login', userController.login);
+//Logout a user
 // router.get('/logout', userController.logout);
+//Check if user is authenticated
 // router.get('/authenticated', userController.isAuthenticated);
 
 router.get('/' , (req, res) => {

@@ -3,7 +3,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 
-//Register
+//Web Token
+const signToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '60d'
+    });
+};
+
+//Register User
 const register = asyncHandler(async (req, res) => {
     const { username, password, email } = req.body;
     if(!username || !password || !email) {
@@ -28,6 +35,7 @@ const register = asyncHandler(async (req, res) => {
             _id: user._id,
             username: user.username,
             email: user.email,
+            token: signToken(user._id)
             
         })
     } else {
@@ -60,48 +68,70 @@ const register = asyncHandler(async (req, res) => {
     // });
 
 
-//Login
-const login = (req, res) => {
-    User.findOne({ username: req.body.username }, (err, user) => {
-        if (err) {
-            res.status(500).json({
-                message: {
-                    msgBody: "Unable to login",
-                    msgError: true
-                }
-            });
-        } else if (!user) {
-            res.status(404).json({
-                message: {
-                    msgBody: "Username not found",
-                    msgError: true
-                }
-            });
-        } else {
-            if (req.body.password === user.password) {
-                const token = jwt.sign(user.toObject(), process.env.SECRET);
-                res.cookie('access_token', token, { httpOnly: true, sameSite: true });
-                res.status(200).json({
-                    isAuthenticated: true,
-                    user: {
-                        username: user.username
-                    },
-                    message: {
-                        msgBody: "Successfully logged in",
-                        msgError: false
-                    }
-                });
-            } else {
-                res.status(403).json({
-                    message: {
-                        msgBody: "Incorrect password",
-                        msgError: true
-                    }
-                });
+//Login User 
+const login = asyncHandler(async (req, res) => {
+    const {username, password} = req.body;
+    const user = await User.findOne({username});
+    if(user && (await bcrypt.compare(password, user.password))) {
+        res.json({
+            message : {
+                msgBody: "Successfully logged in user",
+                msgError: false
+            },
+            user: {
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            token: signToken(user._id)
             }
-        }
-    });
-}
+        });
+    } else {
+        res.status(401)
+        throw new Error('Invalid username or password');
+    }
+});
+    
+    
+    // User.findOne({ username: req.body.username }, (err, user) => {
+    //     if (err) {
+    //         res.status(500).json({
+    //             message: {
+    //                 msgBody: "Unable to login",
+    //                 msgError: true
+    //             }
+    //         });
+    //     } else if (!user) {
+    //         res.status(404).json({
+    //             message: {
+    //                 msgBody: "Username not found",
+    //                 msgError: true
+    //             }
+    //         });
+    //     } else {
+    //         if (req.body.password === user.password) {
+    //             const token = jwt.sign(user.toObject(), process.env.SECRET);
+    //             res.cookie('access_token', token, { httpOnly: true, sameSite: true });
+    //             res.status(200).json({
+    //                 isAuthenticated: true,
+    //                 user: {
+    //                     username: user.username
+    //                 },
+    //                 message: {
+    //                     msgBody: "Successfully logged in",
+    //                     msgError: false
+    //                 }
+    //             });
+    //         } else {
+    //             res.status(403).json({
+    //                 message: {
+    //                     msgBody: "Incorrect password",
+    //                     msgError: true
+    //                 }
+    //             });
+    //         }
+    //     }
+    // });
+
 
 //Logout
 const logout = (req, res) => {
