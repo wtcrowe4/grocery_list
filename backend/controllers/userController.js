@@ -1,33 +1,64 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
 //Register
-const register = (req, res) => {
+const register = asyncHandler(async (req, res) => {
     const { username, password, email } = req.body;
-    const newUser = new User({
+    if(!username || !password || !email) {
+        res.status(400)
+        throw new Error('Please enter all fields');
+    }
+    const userExists = await User.findOne({ email })
+    if(userExists) {
+        res.status(400)
+        throw new Error('User already exists');
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const user = await User.create({
         username,
-        password,
+        password: hashedPassword,
         email
     });
-    newUser.save((err, user) => {
-        if (err) {
-            res.status(500).json({
-                message: {
-                    msgBody: "Unable to add user",
-                    msgError: true
-                }
-            });
-        } else {
-            res.status(201).json({
-                message: {
-                    msgBody: "Account successfully created",
-                    msgError: false
-                }
-            });
-        }
-    });
-}
+
+    if(user) {
+        res.status(201).json({
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            
+        })
+    } else {
+        res.status(400)
+        throw new Error('Invalid user data');
+    }
+});
+
+    // const newUser = new User({
+    //     username,
+    //     password,
+    //     email
+    // });
+    // newUser.save((err, user) => {
+    //     if (err) {
+    //         res.status(500).json({
+    //             message: {
+    //                 msgBody: "Unable to add user",
+    //                 msgError: true
+    //             }
+    //         });
+    //     } else {
+    //         res.status(201).json({
+    //             message: {
+    //                 msgBody: "Account successfully created",
+    //                 msgError: false
+    //             }
+    //         });
+    //     }
+    // });
+
 
 //Login
 const login = (req, res) => {
