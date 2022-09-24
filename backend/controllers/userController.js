@@ -44,29 +44,6 @@ const register = asyncHandler(async (req, res) => {
     }
 });
 
-    // const newUser = new User({
-    //     username,
-    //     password,
-    //     email
-    // });
-    // newUser.save((err, user) => {
-    //     if (err) {
-    //         res.status(500).json({
-    //             message: {
-    //                 msgBody: "Unable to add user",
-    //                 msgError: true
-    //             }
-    //         });
-    //     } else {
-    //         res.status(201).json({
-    //             message: {
-    //                 msgBody: "Account successfully created",
-    //                 msgError: false
-    //             }
-    //         });
-    //     }
-    // });
-
 
 //Login User 
 const login = asyncHandler(async (req, res) => {
@@ -132,6 +109,24 @@ const login = asyncHandler(async (req, res) => {
     //     }
     // });
 
+//User Profile
+const profile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    if(user) {
+        res.json({
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            token: signToken(user._id)
+        });
+    } else {
+        res.status(404);
+        throw new Error('User not found');
+    }
+});
+
+
+
 
 //Logout
 const logout = (req, res) => {
@@ -167,6 +162,7 @@ const isAuthenticated = (req, res) => {
 module.exports = {
     register,
     login,
+    profile,
     logout,
     isAuthenticated
 }
