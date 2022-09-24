@@ -13,3 +13,10 @@
   color: white;
 }
 
+.nav-link {
+  color: lightblue;
+  text-decoration: none;
+  padding: 0 10px;
+
+}
+
