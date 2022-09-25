@@ -1,107 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import '../App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import '../App.css'
+import { Button, Card, Form } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Groceries = () =>{
+function Item({ item, index, markItem, removeItem }) {
+  return (
+    <div className="itemList">
+      <span style={{ textDecoration: item.isDone ? "line-through" : "" }}>{item.text}</span>
+      <div>
+        <Button variant="outline-success" onClick={() => markItem(index)}>✓</Button>{' '}
+        <Button variant="outline-danger" onClick={() => removeItem(index)}>✕</Button>
+      </div>
+    </div>
+  );
+}
 
-  const [items, setItems] = useState([
-		{ itemName: 'item 1', quantity: 1, isSelected: false },
-		
-	]);
+function FormItem({ addItem }) {
+  const [value, setValue] = React.useState("");
 
-	const [inputValue, setInputValue] = useState('');
-	const [totalItemCount, setTotalItemCount] = useState(6);
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (!value) return;
+    addItem(value);
+    setValue("");
+  };
 
-	const handleAddButtonClick = () => {
-		const newItem = {
-			itemName: inputValue,
-			quantity: 1,
-			isSelected: false,
-		};
-    
+  return (
+    <Form onSubmit={handleSubmit}> 
+    <Form.Group>
+      <Form.Label><b>Add Groceries</b></Form.Label>
+      <Form.Control type="text" className="input" value={value} onChange={e => setValue(e.target.value)} placeholder="Add new item" />
+    </Form.Group>
+    <Button variant="primary mb-3" type="submit">
+      Submit
+    </Button>
+  </Form>
+  );
+}
 
-		const newItems = [...items, newItem];
+function Groceries() {
+  const [item, setItems] = React.useState([
+    {
+      
+    }
+  ]);
 
-		setItems(newItems);
-		setInputValue('');
-		calculateTotal();
-	};
+  const addItems = text => {
+    const newItems = [...item, { text }];
+    setItems(newItems);
+  };
 
-	const handleQuantityIncrease = (index) => {
-		const newItems = [...items];
+  const markItem = index => {
+    const newItems = [...item];
+    newItems[index].isDone = true;
+    setItems(newItems);
+  };
 
-		newItems[index].quantity++;
+  const removeItem = index => {
+    const newItems = [...item];
+    newItems.splice(index, 1);
+    setItems(newItems);
+  };
 
-		setItems(newItems);
-		calculateTotal();
-	};
-
-	const handleQuantityDecrease = (index) => {
-		const newItems = [...items];
-
-		newItems[index].quantity--;
-
-		setItems(newItems);
-		calculateTotal();
-	};
-
-	const toggleComplete = (index) => {
-		const newItems = [...items];
-
-		newItems[index].isSelected = !newItems[index].isSelected;
-
-		setItems(newItems);
-	};
-
-	const calculateTotal = () => {
-		const totalItemCount = items.reduce((total, item) => {
-			return total + item.quantity;
-		}, 0);
-
-		setTotalItemCount(totalItemCount);
-	};
-
-	return (
-		<div className='app-background'>
-			<div className='main-container'>
-				<div className='add-item-box'>
-					<input value={inputValue} onChange={(event) => setInputValue(event.target.value)} className='add-item-input' placeholder='Add an item...' />
-					<FontAwesomeIcon icon={faPlus} onClick={() => handleAddButtonClick()} />
-				</div>
-				<div className='item-list'>
-					{items.map((item, index) => (
-						<div className='item-container'>
-							<div className='item-name' onClick={() => toggleComplete(index)}>
-								{item.isSelected ? (
-									<>
-										<FontAwesomeIcon icon={faCheckCircle} />
-										<span className='completed'>{item.itemName}</span>
-									</>
-								) : (
-									<>
-										<FontAwesomeIcon icon={faCircle} />
-										<span>{item.itemName}</span>
-									</>
-								)}
-							</div>
-							<div className='quantity'>
-								<button>
-									<FontAwesomeIcon icon={faChevronLeft} onClick={() => handleQuantityDecrease(index)} />
-								</button>
-								<span> {item.quantity} </span>
-								<button>
-									<FontAwesomeIcon icon={faChevronRight} onClick={() => handleQuantityIncrease(index)} />
-								</button>
-							</div>
-						</div>
-					))}
-				</div>
-				<div className='total'>Total: {totalItemCount}</div>
-			</div>
-		</div>
-	);
-};
-
+  return (
+    <div className="listApp">
+      <div className="container">
+        <h1 className="text-center mb-4">Grocery List</h1>
+        <FormItem addItem={addItems} />
+        <div>
+          {item.map((item, index) => (
+            <Card>
+              <Card.Body>
+                <Item
+                key={index}
+                index={index}
+                item={item}
+                markItem={markItem}
+                removeItem={removeItem}
+                />
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default Groceries;
