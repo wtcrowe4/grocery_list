@@ -21,13 +21,15 @@ const Register = () => {
     useEffect(() => {
         if(error !== null) {
             toast.error(message);
+            console.log(status)
             console.log(error);
-            
+            ;
         }
         if (user) {
+            toast.success(message);
             navigate('/dashboard');
         }
-        dispatch(reset());  
+        dispatch(reset());
 
 
     }, [user, error, status, message, navigate, dispatch]);
