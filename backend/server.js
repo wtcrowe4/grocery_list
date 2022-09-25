@@ -4,7 +4,7 @@ require('dotenv').config();
 const port = process.env.BE_PORT || 8080;
 const mongoose = require('mongoose');
 const mongoURI = process.env.MONGO_URI;
-
+const cors = require('cors');
 
 //Database connection
 mongoose.connect(mongoURI, () => console.log(`MongoDB connected at ${mongoURI}`));
@@ -12,6 +12,7 @@ mongoose.connect(mongoURI, () => console.log(`MongoDB connected at ${mongoURI}`)
 //Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 //Root Route
 app.get('/', (req, res) => {
