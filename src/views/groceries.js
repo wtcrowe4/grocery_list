@@ -19,6 +19,7 @@ const Groceries = () =>{
 			quantity: 1,
 			isSelected: false,
 		};
+    
 
 		const newItems = [...items, newItem];
 
