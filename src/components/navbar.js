@@ -6,8 +6,7 @@ import '../App.css';
 const Navbar= () =>{
   return (
   
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="navbar-nav"> 
+    <nav class="mainNavbar">
     <li>
       <Link to="/">Home</Link>
     </li>
@@ -20,7 +19,6 @@ const Navbar= () =>{
     <li>
       <Link to="/users">Users</Link>
     </li>
-  </div>
   </nav>
   );
 }
