@@ -31,9 +31,8 @@ function FormItem({ addItem }) {
       <Form.Label><b>Add Groceries</b></Form.Label>
       <Form.Control type="text" className="input" value={value} onChange={e => setValue(e.target.value)} placeholder="Add new item" />
     </Form.Group>
-    <Button variant="primary mb-3" type="submit">
-      Submit
-    </Button>
+    <br></br>
+    <button className="submitButton" type="submit">Submit</button>
   </Form>
   );
 }

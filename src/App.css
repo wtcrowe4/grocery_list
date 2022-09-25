@@ -75,8 +75,8 @@ nav li a:hover {color: lightsalmon;}
 
 /* CSS for Grocery List */
 .listApp {
-  padding: 30px;
-  background-color: floralwhite;
+  padding: 10px;
+  background-color: white;
 }
 
 .itemList {
@@ -86,3 +86,17 @@ nav li a:hover {color: lightsalmon;}
   justify-content: space-between;
 }
 
+button.submitButton{
+  background: #4da1ab;
+  border: 5px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  font-family: 'fantasy', copperplate; 
+  font-size: larger;
+  margin: 0 0 0 10px;
+}
+
+button:hover {
+  background-color: lightsalmon ;
+}
