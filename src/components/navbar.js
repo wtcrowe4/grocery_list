@@ -1,10 +1,13 @@
 import React from 'react';
 import {  Link } from "react-router-dom";
+import '../App.css';
 
 
 const Navbar= () =>{
   return (
-  <div>
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="navbar-nav"> 
     <li>
       <Link to="/">Home</Link>
     </li>
@@ -18,6 +21,7 @@ const Navbar= () =>{
       <Link to="/users">Users</Link>
     </li>
   </div>
+  </nav>
   );
 }
 export default Navbar;

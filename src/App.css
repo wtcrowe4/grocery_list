@@ -13,6 +13,7 @@
   color: white;
 }
 
+/* CSS for recipe searchbar */
 .search-form{
   min-height: 10vh;
   display: flex;
@@ -43,4 +44,31 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+/* CSS for Navbar */
+nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #4da1ab;
+}
+
+nav li {float: left;}
+
+nav li a {
+  display: block;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 100px;
+  text-decoration: none;
+}
+
+nav li a:hover {color: lightsalmon;}
+
+@media screen and (max-width: 600px) {
+    nav li {float: left;}
 }
