@@ -39,11 +39,8 @@ function FormItem({ addItem }) {
 }
 
 function Groceries() {
-  const [item, setItems] = React.useState([
-    {
-      
-    }
-  ]);
+  
+  const [item, setItems] = React.useState([]);
 
   const addItems = text => {
     const newItems = [...item, { text }];
