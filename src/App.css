@@ -20,3 +20,15 @@
 
 }
 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  ;
+  align-items: center;
+  
+}
+
+label {
+  padding-top: 10px;
+}
