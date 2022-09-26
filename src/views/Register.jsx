@@ -8,10 +8,10 @@ import Spinner from '../components/Spinner';
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        username: 'sbj',
-        email: 'sbj@outlook.com',
-        password: '123456',
-        password2: '123456'
+        username: '',
+        email: '',
+        password: '',
+        password2: ''
     });
     const { username, email, password, password2 } = formData
     const navigate = useNavigate();
@@ -22,33 +22,33 @@ const Register = () => {
         if(error !== null) {
             toast.error(message);
             console.log(status)
-            console.log(error);
-            ;
+            dispatch(reset());
+            
         }
         if (user) {
             toast.success(message);
             navigate('/dashboard');
         }
-        dispatch(reset());
+        //dispatch(reset());
 
 
     }, [user, error, status, message, navigate, dispatch]);
 
-    const onChange = (e) => setFormData(({ ...formData, [e.target.name]: e.target.value }));
-        
-        
+    const onChange = (e) => setFormData({ ...formData, [e.target.id]: e.target.value });
     
     const onSubmit = (e) => {
         e.preventDefault()
         if (password !== password2) {
             toast.error('Passwords do not match');
             console.log('Passwords do not match');
+            dispatch(reset());
         } else {
-            const newUser = {
-                username,
-                email,
-                password
-            }
+            const newUser = formData;
+            // {
+            //     username,
+            //     email,
+            //     password
+            // }
             
             console.log(newUser);
             dispatch(register(newUser));
@@ -73,8 +73,7 @@ const Register = () => {
                         className="form-control" 
                         id="username" 
                         placeholder="Enter username"
-                        defaultValue={username}
-                        onChange={onChange}
+                        onChange={e => onChange(e)}
                     />
                 </div>
                 <div className="form-group">
@@ -83,8 +82,8 @@ const Register = () => {
                         className="form-control" 
                         id="email" 
                         placeholder="Enter email"
-                        defaultValue={email}
-                        onChange={onChange} />
+                        onChange={e => onChange(e)} 
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
@@ -92,8 +91,8 @@ const Register = () => {
                         className="form-control" 
                         id="password" 
                         placeholder="Enter password"
-                        defaultValue={password}
-                        onChange={onChange} />
+                        onChange={e => onChange(e)} 
+                    />
                 </div>
                 <div className="form-group">    
                     <label htmlFor="password2">Confirm Password</label>
@@ -101,8 +100,8 @@ const Register = () => {
                         className="form-control" 
                         id="password2" 
                         placeholder="Confirm password"
-                        defaultValue={password2}
-                        onChange={onChange} />
+                        onChange={e => onChange(e)} 
+                    />
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-block">Submit</button>
