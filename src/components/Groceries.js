@@ -1,6 +1,6 @@
 import Grocery from "./Grocery";
 import React, { Component } from 'react';
-import { Consumer } from '..context/'
+import { Consumer } from '../context'
 
 export default class Groceries extends Component {
     render() {
