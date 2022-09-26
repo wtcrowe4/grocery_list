@@ -28,8 +28,8 @@ function FormItem({ addItem }) {
   return (
     <Form onSubmit={handleSubmit}> 
     <Form.Group>
-      <Form.Label><b>Add Groceries</b></Form.Label>
-      <Form.Control type="text" className="input" value={value} onChange={e => setValue(e.target.value)} placeholder="Add new item" />
+      <Form.Label><b>Add what you need below!</b></Form.Label>
+      <Form.Control type="text" className="input" value={value} onChange={e => setValue(e.target.value)} placeholder="Add an item" />
     </Form.Group>
     <br></br>
     <button className="submitButton" type="submit">Submit</button>
