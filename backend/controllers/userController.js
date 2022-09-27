@@ -47,8 +47,8 @@ const register = asyncHandler(async (req, res) => {
 
 //Login User 
 const login = asyncHandler(async (req, res) => {
-    const {username, password} = req.body;
-    const user = await User.findOne({username});
+    const {email, password} = req.body;
+    const user = await User.findOne({email});
     if(user && (await bcrypt.compare(password, user.password))) {
         res.json({
             message : {
@@ -68,64 +68,16 @@ const login = asyncHandler(async (req, res) => {
     }
 });
     
-    
-    // User.findOne({ username: req.body.username }, (err, user) => {
-    //     if (err) {
-    //         res.status(500).json({
-    //             message: {
-    //                 msgBody: "Unable to login",
-    //                 msgError: true
-    //             }
-    //         });
-    //     } else if (!user) {
-    //         res.status(404).json({
-    //             message: {
-    //                 msgBody: "Username not found",
-    //                 msgError: true
-    //             }
-    //         });
-    //     } else {
-    //         if (req.body.password === user.password) {
-    //             const token = jwt.sign(user.toObject(), process.env.SECRET);
-    //             res.cookie('access_token', token, { httpOnly: true, sameSite: true });
-    //             res.status(200).json({
-    //                 isAuthenticated: true,
-    //                 user: {
-    //                     username: user.username
-    //                 },
-    //                 message: {
-    //                     msgBody: "Successfully logged in",
-    //                     msgError: false
-    //                 }
-    //             });
-    //         } else {
-    //             res.status(403).json({
-    //                 message: {
-    //                     msgBody: "Incorrect password",
-    //                     msgError: true
-    //                 }
-    //             });
-    //         }
-    //     }
-    // });
-
 //User Profile
 const profile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id);
     if(user) {
-        res.json({
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            token: signToken(user._id)
-        });
+        res.status(200).json(req.user);
     } else {
         res.status(404);
         throw new Error('User not found');
     }
 });
-
-
 
 
 //Logout
@@ -165,5 +117,5 @@ module.exports = {
     profile,
     logout,
     isAuthenticated
-}
+};
 

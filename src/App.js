@@ -1,12 +1,33 @@
-import './App.css';
+import './css/App.css';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Home from './views/Home';
+import Login from './views/Login';
+import Register from './views/Register';
+import Dashboard from './views/Dashboard';
+import Header from './components/Header';
+//import Lists from './components/Lists';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Grocery List</h1>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div className="App">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/lists" element={<Dashboard />} />
+          </Routes>  
+        </div>
+      </Router>
+      <ToastContainer />
+      
+    </>
+
   );
 }
 
