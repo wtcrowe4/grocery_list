@@ -7,7 +7,7 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
-
+//import Lists from './components/Lists';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/lists" element={<Dashboard />} />
           </Routes>  
         </div>
       </Router>

@@ -13,12 +13,13 @@ const Register = () => {
         password: '',
         password2: ''
     });
-    const { username, email, password, password2 } = formData
+    const { password, password2 } = formData
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const{ user, status, error, message } = useSelector(state => state.auth);
 
     useEffect(() => {
+        document.title = 'Register';
         if(error !== null) {
             toast.error(message);
             console.log(status)
@@ -44,15 +45,8 @@ const Register = () => {
             dispatch(reset());
         } else {
             const newUser = formData;
-            // {
-            //     username,
-            //     email,
-            //     password
-            // }
-            
             console.log(newUser);
             dispatch(register(newUser));
-
         }
     };
 
