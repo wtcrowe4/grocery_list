@@ -1,24 +1,15 @@
 import React, { useState } from 'react';
+import '../App.css';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+
 
 function Home () {
-  const [value, setValue] = useState(new Date());
-
-  function onChange(nextValue) {
-    setValue(nextValue);
-  }
+  const [value, onChange] = useState(new Date());
 
   return (
-    
-    <div className="Calendar">
-      <div>
-        <Calendar onChange={onChange} value={value} />
-      </div>
+    <div>
+      <Calendar onChange={onChange} value={value} />
     </div>
-
   );
 }
-
 export default Home;
-
