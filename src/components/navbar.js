@@ -6,7 +6,7 @@ import '../App.css';
 const Navbar= () =>{
   return (
   
-    <nav class="mainNavbar">
+    <nav className="mainNavbar">
     <li>
       <Link to="/">Home</Link>
     </li>
