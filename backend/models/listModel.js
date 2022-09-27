@@ -7,8 +7,8 @@ const listSchema = new Schema({
         required: [true, 'Please enter a title'],
         unique: true
     },
-    content: {
-        type: String,
+    items: {
+        type: [{type: String}],
         required: [true, 'Please enter an item.'],
     },
     userId: {
