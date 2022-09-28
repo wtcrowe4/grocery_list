@@ -17,6 +17,8 @@ const register = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please enter all fields');
     }
+    
+    //Something is wrong here
     const userExists = await User.findOne({ email })
     if(userExists) {
         res.status(400)
