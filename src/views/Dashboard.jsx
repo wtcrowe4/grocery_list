@@ -24,9 +24,9 @@ const Dashboard = () => {
     }
 
     //Clear local storage when page closes
-    window.onbeforeunload = () => {
-        localStorage.clear();
-    }
+    // window.onbeforeunload = () => {
+    //     localStorage.clear();
+    // }
     
 
     return (
