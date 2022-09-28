@@ -23,9 +23,9 @@ const Header = () => {
                             <>
                                 <Nav.Link href="/dashboard"><FaHome />My Home</Nav.Link>
                                 <Nav.Link href="/lists"><FaList />My Lists</Nav.Link>
-                                <Nav.Link href="/logout" onClick={() => {
+                                <Nav.Link  onClick={() => {
                                     dispatch(logout());
-                                    toast.success(message);
+                                    toast.success('Logged out successfully');
                                     navigate('/');
                                     dispatch(reset());
                                 }}><FaSignOutAlt />Logout</Nav.Link>
