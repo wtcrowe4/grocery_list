@@ -8,6 +8,7 @@ const register = async (user) => {
     console.log(response)
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
+        //using session storage creates issues on page refresh
     }
     return response.data;
 };
