@@ -23,6 +23,12 @@ const Dashboard = () => {
         return null;
     }
 
+    //Clear local storage when page closes
+    // window.onbeforeunload = () => {
+    //     localStorage.clear();
+    // }
+    
+
     return (
         <div className="dashboard-container">
         <h1>Dashboard</h1>

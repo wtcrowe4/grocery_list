@@ -27,6 +27,7 @@ const Login = () => {
             navigate('/dashboard');
 
         }
+        
         }, [user, error, status, message, navigate, dispatch]);
     
     
@@ -40,6 +41,8 @@ const Login = () => {
     if(status === 'loading') {
         return <Spinner />
     }
+
+    
     
     return (
         <div className="login-container">

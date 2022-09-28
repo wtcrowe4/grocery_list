@@ -3,17 +3,17 @@ const asyncHandler = require('express-async-handler');
 
 //Create a new list
 const create = asyncHandler(async (req, res) => {
-    const { title, content, userId } = req.body;
+    const { title, items, userId } = req.body;
     const list = await List.create({
         title,
-        content,
+        items,
         userId
     });
     if(list) {
         res.status(201).json({
             _id: list._id,
             title: list.title,
-            content: list.content,
+            items: list.items,
             userId: list.userId
         })
     } else {
@@ -41,11 +41,11 @@ const get = asyncHandler(async (req, res) => {
 
 //Update a list
 const update = asyncHandler(async (req, res) => {
-    const { title, content } = req.body;
+    const { title, items } = req.body;
     const list = await List.findById(req.params.id);
     if(list) {
         list.title = title;
-        list.content = content;
+        list.items = items;
         const updatedList = await list.save();
         res.json(updatedList);
     } else {
