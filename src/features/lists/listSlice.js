@@ -8,24 +8,38 @@ const initialState = {
     message: ''
 };
 
-export const create = createAsyncThunk(
-    'list/create',
-    async (list) => {
-        const response = await listService.create(list);
-        return response;
+export const create = createAsyncThunk('list/create',
+    async (list, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.create(list, token);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
     }
+    //     const response = await listService.create(list);
+    //     return response;
+    // }
 );
 
 export const listSlice = createSlice({
     name: 'list',
     initialState,
     reducers: {
-        reset: (state) => {
-            state.lists = [];
-            state.status = 'idle';
-            state.error = null;
-            state.message = '';
-        }
+        addList: (state, action) => {
+            state.lists.push(action.payload);
+        },
+
+        
+        
+        
+        
+        // reset: (state) => {
+        //     state.lists = [];
+        //     state.status = 'idle';
+        //     state.error = null;
+        //     state.message = '';
+        // }
     },
     extraReducers: (builder) => {
         builder
@@ -37,7 +51,7 @@ export const listSlice = createSlice({
             })
             .addCase(create.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload.message;
+                state.error = true;
                 state.message = 'List creation failed';
             })
             .addCase(create.pending, (state) => {   
@@ -112,7 +126,7 @@ export const listSlice = createSlice({
     }
 });
 
-export const { reset } = listSlice.actions;
+export const { addList } = listSlice.actions;
 
 export default listSlice.reducer;
 

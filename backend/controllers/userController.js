@@ -53,10 +53,10 @@ const login = asyncHandler(async (req, res) => {
     const user = await User.findOne({email});
     if(user && (await bcrypt.compare(password, user.password))) {
         res.json({
-            message : {
-                msgBody: "Successfully logged in user",
-                msgError: false
-            },
+            // message : {
+            //     msgBody: "Successfully logged in user",
+            //     msgError: false
+            // },
             user: {
             _id: user._id,
             username: user.username,
@@ -86,6 +86,10 @@ const profile = asyncHandler(async (req, res) => {
 const logout = (req, res) => {
     res.clearCookie('access_token');
     res.json({
+        // message : {
+        //     msgBody: "Successfully logged out user",
+        //     msgError: false
+        // },
         user: {
             username: ""
         },
