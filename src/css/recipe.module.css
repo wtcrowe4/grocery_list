@@ -1,14 +1,18 @@
 .recipe{
     border-radius: 10px;
     box-shadow: 0px 5px 20px rgb(63, 60, 60);
-    margin: 20px;
-    display: flex;
+    margin: 8px;
+    display: flexbox;
     flex-direction: column;
     justify-content: space-around;
-    background-image: linear-gradient(to right, 
-        lightsalmon 30%, rgb(109, 245, 245) 100%);
+    background-image: url('/src/css/secondRecipeBackground.jpg'); /* Photo by Brett Jordan on Unsplash */
+    background-size: cover;
+    background-repeat: no-repeat;
     align-items: center;
-    min-width: 35%;
+    min-width: 20vh;
+    color: whitesmoke;
+    text-shadow: 2px 2px 2px black;
+    font-size: 18px;
     font-family: copperplate;  
         
 }
@@ -16,4 +20,5 @@
 .image{
     border-radius: 10px;
     margin:0px 0px 20px 0px;
+    box-shadow: 10px 10px 25px #1b1a1a;
 }
