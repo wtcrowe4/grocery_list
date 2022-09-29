@@ -16,7 +16,7 @@ const Header = () => {
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Grocery List</h1>
+                <h1 className="title">Grocery List</h1>
                 <Navbar>
                     <Nav>
                         {user ? (

@@ -4,9 +4,10 @@
 
 body {
   background-image: url('/src/css/backgroundIMG.jpg'); /* photo by Lukas Blazek on https://unsplash.com/photos/f-TWhXOrLiU */
-  background-size: auto;
+  background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+  max-zoom: 50%;
   
 }
 
@@ -55,22 +56,28 @@ button.btn-block:hover {
   align-items: center;
   justify-content: center;
   font-size: calc(15px + 2vmin);
-  font-weight: bolder;
-  color: darkgreen;
+  font-weight: bold;
   text-shadow: 2px 2px 2px whitesmoke;
   font-family: copperplate;
   padding: 20px;
 }
 
+.title {
+  font-size: 75px;
+  color: darkgreen;
+  text-shadow: 3px 3px 3px whitesmoke;
+}
+
 /* Nav Link CSS */
 a.nav-link {
   text-decoration: none;
-  padding: 10px;
+  padding: 5px;
   font-size: 30px;
 }
 
 a.nav-link:hover {
-  color: rgb(152, 0, 0);
+  color: rgb(156, 12, 12);
+  text-shadow: 3px 3px 3px gray;
 }
 
 /* Form CSS */
@@ -103,6 +110,11 @@ label {
  .dashboard-list{
   align-self: flex-start;
   
+}
+
+.dashboard-container {
+  margin: 5%;
+    
 }
 /*.dashboard-recipie {
   align-self: flex-end;
