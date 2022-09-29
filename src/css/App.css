@@ -31,6 +31,21 @@ body {
   font-family: copperplate;
 }
 
+button.btn.btn-block{ 
+  background: #4da1ab;
+  border: 5px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: whitesmoke;
+  font-family: copperplate; 
+  font-size: larger;
+  margin: 0 0 0 10px;
+}
+
+button.btn.btn-block:hover {
+  background-color: lightsalmon ;
+}
+
 /* Header CSS */
 .App-header {
   min-height: 10vh;
@@ -39,7 +54,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: calc(15px + 2vmin);
-  color: white;
+  color: whitesmoke;
   font-weight: bolder;
   color: darkgreen;
   text-shadow: 2px 2px 2px whitesmoke;
@@ -116,10 +131,10 @@ label {
 }
 .search-button { 
   background: #4da1ab;
-  border: 5px solid white;
+  border: 5px solid whitesmoke;
   border-radius: 8px;
   padding: 10px 20px;
-  color: white;
+  color: whitesmoke;
   font-family: 'fantasy', copperplate; 
   font-size: larger;
   margin: 0 0 0 10px;
@@ -130,11 +145,11 @@ label {
 
 button.submitButton { 
   background: #4da1ab;
-  border: 5px solid white;
+  border: 5px solid whitesmoke;
   border-radius: 8px;
   padding: 10px 20px;
   color: white;
-  font-family: 'fantasy', copperplate; 
+  font-family: copperplate; 
   font-size: larger;
   margin: 0 0 0 10px;
 }
@@ -144,5 +159,5 @@ button.submitButton:hover {
 }
 
 .form-control {
-  font-family: 'fantasy', copperplate; 
+  font-family: copperplate; 
 }
