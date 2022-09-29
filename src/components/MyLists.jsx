@@ -51,10 +51,16 @@ const MyLists = () => {
             <div>
                 <ul>
                     {myLists.map((list) => {
-                        return (
-                             
-                                <li key={list._id}>{list.title}</li> 
-                        )})}
+                        if(!list._id) {
+                            return null;
+                        } else {
+                            return (
+                                <a href={'/dashboard'}>
+                                    <li key={list._id}>{list.title}</li> 
+                                </a>
+                            )
+                        }
+                    })}
                     
                 </ul>
             </div>
