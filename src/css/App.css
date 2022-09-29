@@ -4,10 +4,9 @@
 
 body {
   background-image: url('/src/css/backgroundIMG.jpg'); /* photo by Lukas Blazek on https://unsplash.com/photos/f-TWhXOrLiU */
-  margin: 0%;
   background-size: cover;
   background-repeat: no-repeat;
-  
+  min-height: 100vh;
 }
 
 .App {
