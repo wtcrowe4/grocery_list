@@ -9,8 +9,8 @@ const MyLists = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     // const { user } = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
-     const user = useSelector(state => state.auth ? state.auth : null);
-    //const lists = useSelector(state => state.lists);
+    const user = useSelector(state => state.auth ? state.auth : null);
+    const lists = useSelector(state => state.lists);
     
     
     const [listName, setListName] = useState('');
@@ -28,12 +28,10 @@ const MyLists = () => {
         return null;
     }
 
-    // onChange={(e) => setListName(e.target.value)}
+    const onChange= (e) => setListName(e.target.value)
 
     const onSubmit = (e) => {
         e.preventDefault();
-        setListName('List 4')
-        console.log(user.user.user._id)
         const newList = {
             title: listName,
             userId: user.user.user._id
@@ -46,6 +44,22 @@ const MyLists = () => {
 
 
     //code to render all lists for user in database
+    const renderLists = () => {
+        const myLists = lists.lists;
+        console.log(myLists);
+        return (
+            <div>
+                <ul>
+                    {myLists.map((list) => {
+                        return (
+                             
+                                <li key={list._id}>{list.title}</li> 
+                        )})}
+                    
+                </ul>
+            </div>
+        )
+    }
 
 
     return(
@@ -54,11 +68,11 @@ const MyLists = () => {
             <form onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
                     <label htmlFor="listName">Create a New List</label>
-                    <input type="text" name="listName" id="listName" />
+                    <input type="text" name="listName" id="listName" onChange={onChange}/>
                 </div>
                 <button type="submit" className="btn btn-primary">Create List</button>
             </form>
-
+            {renderLists()}
 
         </div>
     )
