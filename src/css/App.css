@@ -31,7 +31,7 @@ body {
   font-family: copperplate;
 }
 
-button.btn.btn-block{ 
+button.btn-block{ 
   background: #4da1ab;
   border: 5px solid white;
   border-radius: 8px;
@@ -42,7 +42,7 @@ button.btn.btn-block{
   margin: 0 0 0 10px;
 }
 
-button.btn.btn-block:hover {
+button.btn-block:hover {
   background-color: lightsalmon ;
 }
 
