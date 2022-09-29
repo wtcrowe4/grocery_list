@@ -1,3 +1,7 @@
+*html {
+  margin: 0;
+}
+
 body {
   background-image: url('/src/css/backgroundIMG.jpg'); /* photo by Lukas Blazek on https://unsplash.com/photos/f-TWhXOrLiU */
   margin: 0%;
@@ -28,6 +32,7 @@ body {
   font-family: copperplate;
 }
 
+/* Header CSS */
 .App-header {
   min-height: 10vh;
   display: flex;
@@ -43,6 +48,7 @@ body {
   padding: 20px;
 }
 
+/* Nav Link CSS */
 a.nav-link {
   text-decoration: none;
   padding: 10px;
@@ -53,6 +59,7 @@ a.nav-link:hover {
   color: rgb(152, 0, 0);
 }
 
+/* Form CSS */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -69,6 +76,7 @@ label {
   padding-top: 10px;
 }
 
+/* Dashboard CSS */
 .dashboard-content {
   display: flex;
   flex-direction: row;
@@ -80,7 +88,7 @@ label {
 
  .dashboard-list{
   align-self: flex-start;
-  width: 30vw;
+  
 }
 /*.dashboard-recipie {
   align-self: flex-end;
@@ -90,4 +98,52 @@ label {
 .fixed-list-container {
   position: fixed;
   top: 40%;
+}
+
+/* Recipe CSS */
+.search-form{
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-bar {
+  width: 50%;
+  border:none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 10px rgb(63, 60, 60);
+  font-family: copperplate;
+}
+.search-button { 
+  background: #4da1ab;
+  border: 5px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  font-family: 'fantasy', copperplate; 
+  font-size: larger;
+  margin: 0 0 0 10px;
+}
+.search-button:hover {
+  background-color: lightsalmon ;
+}
+
+button.submitButton { 
+  background: #4da1ab;
+  border: 5px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: white;
+  font-family: 'fantasy', copperplate; 
+  font-size: larger;
+  margin: 0 0 0 10px;
+}
+
+button.submitButton:hover {
+  background-color: lightsalmon ;
+}
+
+.form-control {
+  font-family: 'fantasy', copperplate; 
 }
