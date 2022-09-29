@@ -1,8 +1,8 @@
 .recipe{
     border-radius: 10px;
-    box-shadow: 0px 5px 20px rgb(63, 60, 60);
+    box-shadow: 10px 10px 25px #1b1a1a;
     margin: 8px;
-    display: flexbox;
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     background-image: url('/src/css/secondRecipeBackground.jpg'); /* Photo by Brett Jordan on Unsplash */
