@@ -8,35 +8,57 @@ const initialState = {
     message: ''
 };
 
+export const create = createAsyncThunk('list/create',
+    async (list, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.create(list, token);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+    //     const response = await listService.create(list);
+    //     return response;
+    // }
+);
+
 export const listSlice = createSlice({
     name: 'list',
     initialState,
     reducers: {
-        reset: (state) => {
-            state.lists = [];
-            state.status = 'idle';
-            state.error = null;
-            state.message = '';
-        }
+        addList: (state, action) => {
+            state.lists.push(action.payload);
+        },
+
+        
+        
+        
+        
+        // reset: (state) => {
+        //     state.lists = [];
+        //     state.status = 'idle';
+        //     state.error = null;
+        //     state.message = '';
+        // }
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(create.fulfilled, (state, action) => {
-    //             state.status = 'succeeded';
-    //             state.error = null;
-    //             state.lists.push(action.payload);
-    //             state.message = 'List created';
-    //         })
-    //         .addCase(create.rejected, (state, action) => {
-    //             state.status = 'failed';
-    //             state.error = action.payload.message;
-    //             state.message = 'List creation failed';
-    //         })
-    //         .addCase(create.pending, (state) => {   
-    //             state.status = 'loading';
-    //             state.error = null;
-    //             state.message = 'Creating list';
-    //         })
+    extraReducers: (builder) => {
+        builder
+            .addCase(create.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.error = null;
+                state.lists.push(action.payload);
+                state.message = 'List created';
+            })
+            .addCase(create.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = true;
+                state.message = 'List creation failed';
+            })
+            .addCase(create.pending, (state) => {   
+                state.status = 'loading';
+                state.error = null;
+                state.message = 'Creating list';
+            })
     //         .addCase(getAll.fulfilled, (state, action) => {
     //             state.status = 'succeeded';
     //             state.error = null;
@@ -101,10 +123,10 @@ export const listSlice = createSlice({
     //             state.error = null;
     //             state.message = 'Removing list';
     //         })
-    // }
+    }
 });
 
-export const { reset } = listSlice.actions;
+export const { addList } = listSlice.actions;
 
 export default listSlice.reducer;
 

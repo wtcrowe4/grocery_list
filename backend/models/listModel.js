@@ -9,7 +9,7 @@ const listSchema = new Schema({
     },
     items: {
         type: [{type: String}],
-        required: [true, 'Please enter an item.'],
+        
     },
     userId: {
         type: Schema.Types.ObjectId,
