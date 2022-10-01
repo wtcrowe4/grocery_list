@@ -8,7 +8,7 @@ const initialState = {
     message: ''
 };
 
-export const create = createAsyncThunk('list/create',
+export const createList = createAsyncThunk('list/create',
     async (list, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.user.token;
@@ -22,6 +22,19 @@ export const create = createAsyncThunk('list/create',
     // }
 );
 
+export const getMyLists = createAsyncThunk('list/all',
+    async (userId, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.all(token, userId);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+
 export const listSlice = createSlice({
     name: 'list',
     initialState,
@@ -34,47 +47,47 @@ export const listSlice = createSlice({
         
         
         
-        // reset: (state) => {
-        //     state.lists = [];
-        //     state.status = 'idle';
-        //     state.error = null;
-        //     state.message = '';
-        // }
+        reset: (state) => {
+            state.lists = [];
+            state.status = 'idle';
+            state.error = null;
+            state.message = '';
+        }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(create.fulfilled, (state, action) => {
+            .addCase(createList.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.error = null;
                 state.lists.push(action.payload);
                 state.message = 'List created';
             })
-            .addCase(create.rejected, (state, action) => {
+            .addCase(createList.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = true;
                 state.message = 'List creation failed';
             })
-            .addCase(create.pending, (state) => {   
+            .addCase(createList.pending, (state) => {   
                 state.status = 'loading';
                 state.error = null;
                 state.message = 'Creating list';
             })
-    //         .addCase(getAll.fulfilled, (state, action) => {
-    //             state.status = 'succeeded';
-    //             state.error = null;
-    //             state.lists = action.payload;
-    //             state.message = 'Lists retrieved';
-    //         })
-    //         .addCase(getAll.rejected, (state, action) => {
-    //             state.status = 'failed';
-    //             state.error = action.payload.message;
-    //             state.message = 'Lists retrieval failed';
-    //         })
-    //         .addCase(getAll.pending, (state) => {
-    //             state.status = 'loading';
-    //             state.error = null;
-    //             state.message = 'Retrieving lists';
-    //         })
+            .addCase(getMyLists.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.error = null;
+                state.lists = action.payload;
+                state.message = 'Lists retrieved';
+            })
+            .addCase(getMyLists.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+                state.message = 'Lists retrieval failed';
+            })
+            .addCase(getMyLists.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+                state.message = 'Retrieving lists';
+             })
     //         .addCase(getOne.fulfilled, (state, action) => {
     //             state.status = 'succeeded';
     //             state.error = null;
@@ -126,7 +139,7 @@ export const listSlice = createSlice({
     }
 });
 
-export const { addList } = listSlice.actions;
+export const { reset } = listSlice.actions;
 
 export default listSlice.reducer;
 

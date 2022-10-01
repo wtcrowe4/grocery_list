@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const listSchema = new Schema({
     title: {
         type: String,
-        required: [true, 'Please enter a title'],
-        unique: true
+        required: [true, 'Please enter a title']
     },
     items: {
         type: [{type: String}],
