@@ -92,11 +92,14 @@ const MyLists = () => {
         } else {
             return (
                 <ul>
-                    {lists.lists.map(list => (
-                        <a href={'/dashboard'} key={list._id}>
+                    {lists.lists.map(list => {
+                        return (
+                        <a href={'/dashboard/:id'} key={list._id}>
                             <li key={list._id}>{list.title}</li>
                         </a>
-                    ))}
+                        )
+                      })}
+                    
                 </ul>
             )
         }
@@ -137,7 +140,7 @@ const MyLists = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Create List</button>
             </form>
-            {/* <p>{[myLists]}</p> */}
+            
             {renderLists()}
 
             </div>

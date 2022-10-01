@@ -22,6 +22,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/lists" element={<MyLists />} />
+            <Route path="/dashboard/:id" element={<Dashboard />} />
           </Routes>  
         </div>
       </Router>
