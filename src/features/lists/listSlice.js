@@ -17,9 +17,7 @@ export const createList = createAsyncThunk('list/create',
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
-    //     const response = await listService.create(list);
-    //     return response;
-    // }
+ 
 );
 
 export const getMyLists = createAsyncThunk('list/all',
@@ -34,14 +32,38 @@ export const getMyLists = createAsyncThunk('list/all',
     }
 );
 
+export const deleteList = createAsyncThunk('list/delete',
+    async (listId, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.deleteList(listId, token);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+export const getOneList = createAsyncThunk('list/get',
+    async (listId, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.get(listId, token);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 
 export const listSlice = createSlice({
     name: 'list',
     initialState,
     reducers: {
-        addList: (state, action) => {
-            state.lists.push(action.payload);
-        },
+        // addList: (state, action) => {
+        //     state.lists.push(action.payload);
+        // },
 
         
         
@@ -88,22 +110,22 @@ export const listSlice = createSlice({
                 state.error = null;
                 state.message = 'Retrieving lists';
              })
-    //         .addCase(getOne.fulfilled, (state, action) => {
-    //             state.status = 'succeeded';
-    //             state.error = null;
-    //             state.lists.push(action.payload);
-    //             state.message = 'List retrieved';
-    //         })
-    //         .addCase(getOne.rejected, (state, action) => {
-    //             state.status = 'failed';
-    //             state.error = action.payload.message;
-    //             state.message = 'List retrieval failed';
-    //         })
-    //         .addCase(getOne.pending, (state) => {
-    //             state.status = 'loading';
-    //             state.error = null;
-    //             state.message = 'Retrieving list';
-    //         })
+            // .addCase(getOneList.fulfilled, (state, action) => {
+            //     state.status = 'succeeded';
+            //     state.error = null;
+            //     state.lists.push(action.payload);
+            //     state.message = 'List retrieved';
+            // })
+            // .addCase(getOneList.rejected, (state, action) => {
+            //     state.status = 'failed';
+            //     state.error = action.payload.message;
+            //     state.message = 'List retrieval failed';
+            // })
+            // .addCase(getOneList.pending, (state) => {
+            //     state.status = 'loading';
+            //     state.error = null;
+            //     state.message = 'Retrieving list';
+            // })
     //         .addCase(update.fulfilled, (state, action) => {
     //             state.status = 'succeeded';
     //             state.error = null;
@@ -120,22 +142,22 @@ export const listSlice = createSlice({
     //             state.error = null;
     //             state.message = 'Updating list';
     //         })
-    //         .addCase(remove.fulfilled, (state, action) => {
-    //             state.status = 'succeeded';
-    //             state.error = null;
-    //             state.lists = state.lists.filter(list => list.id !== action.payload.id);
-    //             state.message = 'List removed';
-    //         })
-    //         .addCase(remove.rejected, (state, action) => {
-    //             state.status = 'failed';
-    //             state.error = action.payload.message;
-    //             state.message = 'List removal failed';
-    //         })
-    //         .addCase(remove.pending, (state) => {
-    //             state.status = 'loading';
-    //             state.error = null;
-    //             state.message = 'Removing list';
-    //         })
+            .addCase(deleteList.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.error = null;
+                state.lists = state.lists.filter(list => list._id !== action.payload.id);
+                state.message = 'List removed';
+            })
+            .addCase(deleteList.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+                state.message = 'List removal failed';
+            })
+            .addCase(deleteList.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+                state.message = 'Removing list';
+            })
     }
 });
 

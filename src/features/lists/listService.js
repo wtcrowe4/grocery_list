@@ -19,9 +19,6 @@ const all = async (token, userId) => {
         headers: {
             Authorization: `Bearer ${token}`
         },
-        // params: {
-        //     userId: userId
-        // }
     }
     const response = await axios.get(`${api_url}/all`, config);
     // response.data.forEach(list => {
@@ -31,14 +28,36 @@ const all = async (token, userId) => {
     //     } else {
     //         return null;
     //     }
-    
-    
-   return response.data 
+    return response.data 
     // });
 };
     
-//     return myLists;
-// };
+
+//Get a list
+const get = async (listId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.get(`${api_url}/${listId}`, config);
+    return response.data;
+};
+
+
+//Delete a list
+const deleteList = async (listId, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        params: {
+            id: listId
+        }
+    }
+    const response = await axios.delete(`${api_url}/${listId}`, config);
+    return response.data;
+};
 
 
 
@@ -48,9 +67,10 @@ const all = async (token, userId) => {
 const listService = {
     create,
     all,
-    // get,
+    deleteList,
+    get,
     // update,
-    // deleteList
+    
 };
 
 export default listService;

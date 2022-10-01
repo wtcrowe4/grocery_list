@@ -8,9 +8,12 @@ import Register from './views/Register';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
 import MyLists from './components/MyLists';
+import ListDashboard from './views/ListDashboard';
 //import Lists from './components/Lists';
 
+
 function App() {
+
   return (
     <>
       <Router>
@@ -22,7 +25,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/lists" element={<MyLists />} />
-            <Route path="/dashboard/:id" element={<Dashboard />} />
+            <Route path="/dashboard/:id" element={<ListDashboard />} />
           </Routes>  
         </div>
       </Router>

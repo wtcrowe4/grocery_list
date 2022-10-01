@@ -65,10 +65,10 @@ function List() {
         <FormItem addItem={addItems} />
         <div>
           {item.map((item, index) => (
-            <Card>
+            <Card key={index}>
               <Card.Body>
                 <Item
-                key={index}
+                
                 index={index}
                 item={item}
                 markItem={markItem}

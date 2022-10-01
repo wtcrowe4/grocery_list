@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 //import listSlice from '../features/lists/listSlice';
-import { createList, getMyLists } from '../features/lists/listSlice';
+import { createList, getMyLists, deleteList } from '../features/lists/listSlice';
 
 
 const MyLists = () => {
@@ -21,26 +21,10 @@ const MyLists = () => {
         if(!user) {
             navigate('/login' , { replace: true });
         }
-    
         
-    
         dispatch(getMyLists(user.user._id));
-        // const getLists = async () => {
-        //     const allLists = await dispatch(getMyLists());
-        //     console.log(user.user.user._id);
-        //     console.log(allLists.payload);
-        //     allLists.payload.map(list => {
-        //         if (list.userId === user.user.user._id) {
-        //             console.log(list.title);
-        //             //setMyLists([...myLists, list]);
-        //             return list;
-        //         } else {
-        //             return null;
-        //         }
-        // })
-    // }}  
-    
-    //setMyLists([...myLists, getLists()]);
+        
+       
 
          
         
@@ -74,11 +58,20 @@ const MyLists = () => {
         console.log(listName)
         console.log(newList);
         //listSlice.addList(newList);
-        dispatch(createList(newList));   
+        dispatch(createList(newList));
+        //clear input field
+        
     }
 
 
+    const onDeleteClick = (e,id) => {
+        e.preventDefault();
+        dispatch(deleteList(id));
+        //update list
+        dispatch(getMyLists(user.user._id));
 
+
+    }
    
     
 
@@ -94,9 +87,16 @@ const MyLists = () => {
                 <ul>
                     {lists.lists.map(list => {
                         return (
-                        <a href={'/dashboard/:id'} key={list._id}>
-                            <li key={list._id}>{list.title}</li>
-                        </a>
+                        <div key={list._id}>
+                            
+                            <a href={`/dashboard/${list._id}`} >
+                                <li key={list._id}>{list.title}</li>
+                            </a>
+                            <button className="btn btn-sm" 
+                                onClick={e => onDeleteClick(e, list._id)}>Delete
+                            </button>
+                           
+                        </div>
                         )
                       })}
                     
@@ -136,7 +136,7 @@ const MyLists = () => {
             <form onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
                     <label htmlFor="listName">Create a New List</label>
-                    <input type="text" name="listName" id="listName" onChange={onChange}/>
+                    <input type="text" name="listName" id="listName" onChange={onChange} defaultValue={listName}/>
                 </div>
                 <button type="submit" className="btn btn-primary">Create List</button>
             </form>
