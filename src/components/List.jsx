@@ -32,7 +32,7 @@ function FormItem({ addItem }) {
       <Form.Control type="text" className="input" value={value} onChange={e => setValue(e.target.value)} placeholder="Add an item" />
     </Form.Group>
     <br></br>
-    <button className="submitButton" type="submit">Submit</button>
+    <button className="submitButton" type="submit">Add Item</button>
   </Form>
   );
 }
@@ -64,22 +64,30 @@ function List() {
   const { user } = useSelector(state => state.auth);
   const [sent, setSent] = React.useState(false);
   //const { email } = useSelector(state => state.auth.user.email);
-  const [emailList, setEmailList] = React.useState([]);
+  //const [emailList, setEmailList] = React.useState([]);
+  
   console.log(user)
-  const email = user.user.email;
-  console.log(email);
   const subject = "Your List";
+  
+  
   const handleSend = async (e) => {
     e.preventDefault();
+    
+    
     if (!user) return;
-    setEmailList(item)
-
-    const response = await axios.post('http://localhost:8080/api/send_mail', { email, subject , emailList });
+    //setEmailList(item)
+    console.log(item)
+    const email = user.email || user.user.email;
+    console.log(email);
+    try{
+    const response = await axios.post('http://localhost:8080/send_mail', { email, subject , item });
     console.log(response);
     setSent(true);
-    
+    } catch (error) {
+      console.log(error);
+    }
   };
-  console.log(sent)
+  
 
 
 

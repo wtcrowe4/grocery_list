@@ -37,13 +37,13 @@ app.use((err, req, res, next) => {
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 //Email Service
-app.post('api/send_mail', cors(), async (req, res) => {
+app.post('/send_mail', cors(), async (req, res) => {
     const { email, subject, message } = req.body;
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_HOST,
-        post: process.env.MAIL_PORT,
+        post: process.env.BE_PORT,
         auth: {
-            user: process.env.MAIL.USER,
+            user: process.env.MAIL_USER,
             pass: process.env.PASSWORD
         }
     });
@@ -57,7 +57,8 @@ app.post('api/send_mail', cors(), async (req, res) => {
     await transporter.sendMail(mailOptions, (err, data) => {
         if(err) {
             res.json({
-                status: 'fail'
+                status: 'fail',
+                message: err
             });
         } else {
             res.json({
