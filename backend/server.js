@@ -5,6 +5,9 @@ const port = process.env.BE_PORT || 8080;
 const mongoose = require('mongoose');
 const mongoURI = 'mongodb://localhost:27017/GroceryList';
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+//const bodyParser = require('body-parser');
+
 
 //Database connection
 mongoose.connect(mongoURI, () => console.log(`MongoDB connected at ${mongoURI}`));
@@ -32,3 +35,37 @@ app.use((err, req, res, next) => {
 
 //Server
 app.listen(port, () => console.log(`Server running on port ${port}`));
+
+//Email Service
+app.post('api/send_mail', cors(), async (req, res) => {
+    const { email, subject, message } = req.body;
+    const transporter = nodemailer.createTransport({
+        host: process.env.MAIL_HOST,
+        post: process.env.MAIL_PORT,
+        auth: {
+            user: process.env.MAIL.USER,
+            pass: process.env.PASSWORD
+        }
+    });
+    const mailOptions = {
+        from: process.env.MAIL_USER,
+        to: email,
+        subject: subject,
+        html: `<h2>Here is your list:</h2>
+            <p>${message}</p>`
+    };
+    await transporter.sendMail(mailOptions, (err, data) => {
+        if(err) {
+            res.json({
+                status: 'fail'
+            });
+        } else {
+            res.json({
+                status: 'success',
+                data: data
+            });
+        }
+    });
+});
+
+

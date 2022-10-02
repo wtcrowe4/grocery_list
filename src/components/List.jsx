@@ -58,6 +58,33 @@ function List() {
     setItems(newItems);
   };
 
+  //Email list to user
+  const axios = require('axios');
+  const { useSelector } = require("react-redux");
+  const { user } = useSelector(state => state.auth);
+  const [sent, setSent] = React.useState(false);
+  //const { email } = useSelector(state => state.auth.user.email);
+  const [emailList, setEmailList] = React.useState([]);
+  console.log(user)
+  const email = user.user.email;
+  console.log(email);
+  const subject = "Your List";
+  const handleSend = async (e) => {
+    e.preventDefault();
+    if (!user) return;
+    setEmailList(item)
+
+    const response = await axios.post('http://localhost:8080/api/send_mail', { email, subject , emailList });
+    console.log(response);
+    setSent(true);
+    
+  };
+  console.log(sent)
+
+
+
+
+
   return (
     <div className="listApp">
       <div className="fixed-list-container">
@@ -77,6 +104,7 @@ function List() {
               </Card.Body>
             </Card>
           ))}
+          <button onClick={handleSend} className="submitButton">Send List to Me</button>
         </div>
       </div>
     </div>
