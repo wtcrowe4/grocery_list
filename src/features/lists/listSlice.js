@@ -56,14 +56,37 @@ export const getOneList = createAsyncThunk('list/get',
     }
 );
 
+export const addItem = createAsyncThunk(`list/addItem`,
+    async (item, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.addItem(item, token);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }   
+);
+
+export const updateList = createAsyncThunk(`list/update`,
+    async (list, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.user.token;
+            return await listService.update(list, token);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+
 
 export const listSlice = createSlice({
     name: 'list',
     initialState,
     reducers: {
-        // addList: (state, action) => {
-        //     state.lists.push(action.payload);
-        // },
+    
 
         
         
@@ -110,38 +133,38 @@ export const listSlice = createSlice({
                 state.error = null;
                 state.message = 'Retrieving lists';
              })
-            // .addCase(getOneList.fulfilled, (state, action) => {
-            //     state.status = 'succeeded';
-            //     state.error = null;
-            //     state.lists.push(action.payload);
-            //     state.message = 'List retrieved';
-            // })
-            // .addCase(getOneList.rejected, (state, action) => {
-            //     state.status = 'failed';
-            //     state.error = action.payload.message;
-            //     state.message = 'List retrieval failed';
-            // })
-            // .addCase(getOneList.pending, (state) => {
-            //     state.status = 'loading';
-            //     state.error = null;
-            //     state.message = 'Retrieving list';
-            // })
-    //         .addCase(update.fulfilled, (state, action) => {
-    //             state.status = 'succeeded';
-    //             state.error = null;
-    //             state.lists.push(action.payload);
-    //             state.message = 'List updated';
-    //         })
-    //         .addCase(update.rejected, (state, action) => {
-    //             state.status = 'failed';
-    //             state.error = action.payload.message;
-    //             state.message = 'List update failed';
-    //         })
-    //         .addCase(update.pending, (state) => {
-    //             state.status = 'loading';
-    //             state.error = null;
-    //             state.message = 'Updating list';
-    //         })
+            .addCase(getOneList.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.error = null;
+                state.lists = action.payload;
+                state.message = 'List retrieved';
+            })
+            .addCase(getOneList.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+                state.message = 'List retrieval failed';
+            })
+            .addCase(getOneList.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+                state.message = 'Retrieving list';
+            })
+            .addCase(addItem.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.error = null;
+                state.lists.items.push(action.payload);
+                state.message = 'List updated';
+            })
+            .addCase(addItem.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+                state.message = 'List update failed';
+            })
+            .addCase(addItem.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+                state.message = 'Updating list';
+             })
             .addCase(deleteList.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.error = null;

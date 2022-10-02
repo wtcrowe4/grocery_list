@@ -1,17 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 //import ListForm from '../components/ListForm';
 import Recipes from '../components/Recipes';
 import SavedList from '../components/SavedList';
-import { getOneList } from '../features/lists/listSlice';
+//import { getOneList } from '../features/lists/listSlice';
 
 
 const ListDashboard = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth ? state.auth : null);
-    const { lists } = useSelector(state => state.lists ? state.lists : null);
+    //const { lists } = useSelector(state => state.lists ? state.lists : null);
     
     useEffect(() => {
         document.title = 'Dashboard';

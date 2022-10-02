@@ -14,6 +14,8 @@ router.get('/:id', protect, listController.get);
 router.put('/:id', protect, listController.update);
 //Delete a list
 router.delete('/:id', protect, listController.deleteList);
+//Add an item to a list
+router.put('/addItem/:id', protect, listController.addItem);
 
 
 module.exports = router;

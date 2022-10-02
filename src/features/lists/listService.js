@@ -55,11 +55,31 @@ const deleteList = async (listId, token) => {
             id: listId
         }
     }
-    const response = await axios.delete(`${api_url}/${listId}`, config);
+    const response = await axios.delete(`${api_url}/`, config);
     return response.data;
 };
 
+//Add an item to a list
+const addItem = async (item, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.put(`${api_url}/addItem`, item, config);
+    return response.data;
+};
 
+//Update
+const update = async (list, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.put(`${api_url}/${list}`, list, config);
+    return response.data;
+};
 
 
 
@@ -69,7 +89,8 @@ const listService = {
     all,
     deleteList,
     get,
-    // update,
+    addItem,
+    update,
     
 };
 

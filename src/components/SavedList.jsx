@@ -1,22 +1,42 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector, } from 'react-redux';
-import { getOneList } from '../features/lists/listSlice';
+import { getOneList, addItem, updateList } from '../features/lists/listSlice';
 
 
 const SavedList = () => {
-    //const [myList, setMyList] = useState({});
+    
     const dispatch = useDispatch();
     const listId = window.location.pathname.split('/')[2];
-    console.log(listId)
     
+    const { lists } = useSelector(state => state.lists ? state.lists : null);
     
+    const [listItems, setListItems] = useState(lists.items ? lists.items : []);
+    const [item, setItem] = useState('');
+
+   
+
     const onChange = (e) => {
         e.preventDefault();
+        setItem(e.target.value);
+
+    //    console.log(listItems);
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
+        //add list item to list
+        dispatch(updateList(listId));
+        //push item to redux state and database
+        //setListItems([...listItems, item]);        
+        
+        //clear input field
+
+
+        
+        
+        
+        setItem('');    
     }
 
     useEffect(() => {
@@ -24,11 +44,26 @@ const SavedList = () => {
         
     }, [dispatch, listId])
 
+     
     
+    const renderList = () => {
+  
+              if (lists.items && lists.items.length > 0) {
+            return lists.items.map(item => {
+                return (
+                    <li key={item}>{item}</li>
+                )
+            })
+            
+        }
+     }
+
+                
+
   
     return (
     <div className="saved-list">
-             <h3>List Title</h3>
+             <h3>{lists.title}</h3>
              <form onSubmit={onSubmit}>
                  <input type="text"
                      placeholder="List Item"
@@ -39,6 +74,11 @@ const SavedList = () => {
                  />
                  <input type="submit" className="btn btn-primary" value="Add Item" />
              </form>
+                
+                {/* Save button to run updateList function */}
+                <button className="btn btn-primary">Save</button>
+                
+                {renderList()}
          </div>
     
   )

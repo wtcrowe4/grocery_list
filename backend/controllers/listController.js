@@ -66,13 +66,29 @@ const deleteList = asyncHandler(async (req, res) => {
     }
 });
 
+//Add an item to a list
+const addItem = asyncHandler(async (req, res) => {
+    const { item } = req.body;
+    const list = await List.findById(req.params.id);
+    if(list) {
+        list.items.push(item);
+        const updatedList = await list.save();
+        res.json(updatedList);
+    } else {
+        res.status(404);
+        throw new Error('List not found');
+    }
+});
+
+
 
 module.exports = {
     create,
     all,
     get,
     update,
-    deleteList
+    deleteList,
+    addItem
 };
 
 
