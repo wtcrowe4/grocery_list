@@ -38,7 +38,7 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 
 //Email Service
 app.post('/send_mail', cors(), async (req, res) => {
-    const { subject, message } = req.body;
+    const { email, item , subject } = req.body;
     // const transporter = nodemailer.createTransport({
     //     host: process.env.MAIL_HOST,
     //     post: process.env.BE_PORT,
@@ -65,12 +65,22 @@ app.post('/send_mail', cors(), async (req, res) => {
         }
         
       });
+    
+      const list = item.map(item => {
+          return (  
+                `<ul>
+                    <li>${item.text}</li>
+                </ul>` )   
+           // item.text;
+        });
+
     const mailOptions = {
-        from: process.env.MAIL_USER,
-        to: process.env.MAIL_USER,
+        from: 'myapp@gmail.com',
+        to: email,
         subject: subject,
-        html: `<h2>Here is your list:</h2>
-            <p>${message}</p>`
+        html: `<h2>Here is your grocery list:</h2>
+            
+           ${list}`
     };
     await transport.sendMail(mailOptions, (err, data) => {
         if(err) {
