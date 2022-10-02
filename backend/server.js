@@ -38,23 +38,41 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 
 //Email Service
 app.post('/send_mail', cors(), async (req, res) => {
-    const { email, subject, message } = req.body;
-    const transporter = nodemailer.createTransport({
-        host: process.env.MAIL_HOST,
-        post: process.env.BE_PORT,
+    const { subject, message } = req.body;
+    // const transporter = nodemailer.createTransport({
+    //     host: process.env.MAIL_HOST,
+    //     post: process.env.BE_PORT,
+    //     secure: false,
+    //     auth: {
+    //         user: process.env.MAIL_USER,
+    //         pass: process.env.PASSWORD
+    //     },
+    //     tls: {
+    //         rejectUnauthorized: false
+    //     }
+
+    // });
+    var transport = nodemailer.createTransport({
+        host: "smtp.mailtrap.io",
+        port: 2525,
+        secure: false,
         auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.PASSWORD
+          user: "0cb5411844f59c",
+          pass: "7623d64c38032c"
+        },
+        tls: {
+            rejectUnauthorized: false
         }
-    });
+        
+      });
     const mailOptions = {
         from: process.env.MAIL_USER,
-        to: email,
+        to: process.env.MAIL_USER,
         subject: subject,
         html: `<h2>Here is your list:</h2>
             <p>${message}</p>`
     };
-    await transporter.sendMail(mailOptions, (err, data) => {
+    await transport.sendMail(mailOptions, (err, data) => {
         if(err) {
             res.json({
                 status: 'fail',

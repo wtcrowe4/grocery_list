@@ -77,10 +77,11 @@ function List() {
     if (!user) return;
     //setEmailList(item)
     console.log(item)
-    const email = user.email || user.user.email;
-    console.log(email);
+    //const email = user.email || user.user.email;
+    //setting email to mailtrap for testing
+    //console.log(email);
     try{
-    const response = await axios.post('http://localhost:8080/send_mail', { email, subject , item });
+    const response = await axios.post('http://localhost:8080/send_mail', { subject , item });
     console.log(response);
     setSent(true);
     } catch (error) {
