@@ -211,3 +211,12 @@ div.spinner-border {
 .spinner-container {
   padding-bottom: 400px;
 }
+
+.Home {
+  padding: 0px 330px 0px 330px;
+  font-size: 25px;
+  font-weight: bolder;
+  color: darkgreen;
+  text-shadow: 2px 2px 2px whitesmoke;
+  font-family: copperplate;
+}
