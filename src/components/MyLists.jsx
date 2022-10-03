@@ -60,7 +60,7 @@ const MyLists = () => {
         //listSlice.addList(newList);
         dispatch(createList(newList));
         //clear input field
-        
+
     }
 
 
@@ -132,7 +132,8 @@ const MyLists = () => {
 
     return(
         <div className="form">
-            <h3>My Lists</h3>
+            <h2>My Lists</h2>
+            <h3>Saved lists on your account.</h3>
             <form onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
                     <label htmlFor="listName">Create a New List</label>
