@@ -32,7 +32,7 @@ export const getMyLists = createAsyncThunk('list/all',
     }
 );
 
-export const deleteList = createAsyncThunk('list/delete',
+export const deleteList = createAsyncThunk('list/:id}',
     async (listId, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.user.token;

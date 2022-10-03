@@ -21,16 +21,23 @@ const all = async (token, userId) => {
         },
     }
     const response = await axios.get(`${api_url}/all`, config);
-    // response.data.forEach(list => {
-    //     if (list.userId === userId) {
-    //         console.log(list);
-    //         return list;
-    //     } else {
-    //         return null;
-    //     }
-    return response.data 
-    // });
+    response.data.map(list => {
+        // if (list.userId !== userId) {
+        //     return null;
+        // } else {
+        //     console.log(list);
+        //     return list;
+        // }
+        console.log(list);
+        return list;
+    })
+    return response.data;
 };
+    // });
+    
+    
+
+
     
 
 //Get a list
@@ -55,7 +62,8 @@ const deleteList = async (listId, token) => {
             id: listId
         }
     }
-    const response = await axios.delete(`${api_url}/`, config);
+    console.log(listId)
+    const response = await axios.delete(`${api_url}/${listId}`, config);
     return response.data;
 };
 

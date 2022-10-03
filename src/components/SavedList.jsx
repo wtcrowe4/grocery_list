@@ -31,11 +31,6 @@ const SavedList = () => {
         //setListItems([...listItems, item]);        
         
         //clear input field
-
-
-        
-        
-        
         setItem('');    
     }
 
@@ -45,7 +40,7 @@ const SavedList = () => {
     }, [dispatch, listId])
 
      
-    
+
     const renderList = () => {
   
               if (lists.items && lists.items.length > 0) {
@@ -62,7 +57,6 @@ const SavedList = () => {
         }
      }
 
-                
 
   
     return (
@@ -82,7 +76,8 @@ const SavedList = () => {
              </form>
                 
                 {/* Save button to run updateList function */}
-                <button className="btn btn-primary">Save</button>
+                <button className="btn btn-primary" onClick={e => console.log('Save')}>Save List</button>
+                <button className="btn btn-primary" onClick={e => console.log('Email')}>E-Mail this list.</button>
                 
                 
          </div>
@@ -94,3 +89,24 @@ const SavedList = () => {
 export default SavedList;
 
 
+           //Email list to user
+//   const axios = require('axios');
+//   const { useSelector } = require("react-redux");
+//   const { user } = useSelector(state => state.auth);
+//   const [sent, setSent] = React.useState(false);
+//   const subject = "Your List";
+  
+//   const handleSend = async (e) => {
+//     e.preventDefault();
+//     if (!user) return;
+//     console.log(item)
+//     const email = user.email || user.user.email;
+//     try{
+//       const response = await axios.post('http://localhost:8080/send_mail', { email, subject , item});
+//       console.log(response);
+//       setSent(true);
+//       console.log(sent)
+//     } catch (error) {
+//        console.log(error);
+//     }
+//   };
