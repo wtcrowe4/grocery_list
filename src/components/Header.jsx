@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import '../css/App.css';
-import { FaHome, FaSignInAlt, FaUserPlus, FaList, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaSignInAlt, FaUserPlus, FaSignOutAlt } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +22,7 @@ const Header = () => {
                         {user ? (
                             <>
                                 <Nav.Link href="/dashboard"><FaHome />My Home</Nav.Link>
-                                <Nav.Link href="/lists"><FaList />My Lists</Nav.Link>
+                                {/* <Nav.Link href="/lists"><FaList />My Lists</Nav.Link> */}
                                 <Nav.Link  onClick={() => {
                                     dispatch(logout());
                                     navigate('/');

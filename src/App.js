@@ -7,8 +7,8 @@ import Login from './views/Login';
 import Register from './views/Register';
 import Dashboard from './views/Dashboard';
 import Header from './components/Header';
-import MyLists from './components/MyLists';
-import ListDashboard from './views/ListDashboard';
+// import MyLists from './components/MyLists';
+// import ListDashboard from './views/ListDashboard';
 //import Lists from './components/Lists';
 
 
@@ -24,8 +24,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/lists" element={<MyLists />} />
-            <Route path="/dashboard/:id" element={<ListDashboard />} />
+            {/* <Route path="/lists" element={<MyLists />} />
+            <Route path="/dashboard/:id" element={<ListDashboard />} /> */}
           </Routes>  
         </div>
       </Router>
