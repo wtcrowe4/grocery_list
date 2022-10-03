@@ -1,17 +1,14 @@
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import ListForm from '../components/ListForm';
 import Recipes from '../components/Recipes';
 import List from '../components/List';
-//import { getOneList } from '../features/lists/listSlice';
+
 
 
 const Dashboard = () => {
     const navigate = useNavigate();
-    //const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth ? state.auth : null);
-    //const { lists } = useSelector(state => state.lists ? state.lists : null);
     
     useEffect(() => {
         document.title = 'Dashboard';
@@ -19,22 +16,12 @@ const Dashboard = () => {
         if(!user) {
             navigate('/login' , { replace: true });
         }
-
-        //dispatch(getOneList(lists.list._id));
-
-
     }, [user, navigate]);
 
     //Fix error on welcome message when user is null
     if (!user) {
         return null;
     }
-
-    //Clear local storage when page closes
-    // window.onbeforeunload = () => {
-    //     localStorage.clear();
-    // }
-    
 
     return (
         <div className="dashboard-container">

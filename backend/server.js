@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const mongoURI = 'mongodb://localhost:27017/GroceryList';
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-//const bodyParser = require('body-parser');
 
 
 //Database connection
