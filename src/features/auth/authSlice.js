@@ -96,10 +96,19 @@ export const authSlice = createSlice({
                 state.user = null;
                 state.message = 'Logout Successful';
             })
-            // .addCase(logout.rejected, (state, action) => {
-            // .addCase(logout.pending, (state, action) => {
-
-    }
+            .addCase(logout.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload.message;
+                state.user = null;
+                state.message = 'Logout Failed';
+            })
+            .addCase(logout.pending, (state, action) => {
+                state.status = 'loading';
+                state.error = null;
+                state.user = null;
+                state.message = 'Logging Out';
+            })
+            }
 });
 
 export const { reset } = authSlice.actions;

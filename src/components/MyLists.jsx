@@ -22,7 +22,7 @@ const MyLists = () => {
             navigate('/login' , { replace: true });
         }
         
-        dispatch(getMyLists(user.user._id));
+        dispatch(getMyLists(user._id));
         
        
 

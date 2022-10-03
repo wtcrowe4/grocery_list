@@ -51,7 +51,11 @@ const SavedList = () => {
               if (lists.items && lists.items.length > 0) {
             return lists.items.map(item => {
                 return (
-                    <li key={item}>{item}</li>
+                    <ul className="saved-list">
+                        <li key={item}>{item}
+                            <button className="btn-sm" onClick={e=>console.log(e)}>x</button>
+                        </li>
+                    </ul>
                 )
             })
             
@@ -63,7 +67,9 @@ const SavedList = () => {
   
     return (
     <div className="saved-list">
-             <h3>{lists.title}</h3>
+             <h1>{lists.title}</h1>
+             
+             {renderList()}
              <form onSubmit={onSubmit}>
                  <input type="text"
                      placeholder="List Item"
@@ -78,7 +84,7 @@ const SavedList = () => {
                 {/* Save button to run updateList function */}
                 <button className="btn btn-primary">Save</button>
                 
-                {renderList()}
+                
          </div>
     
   )
