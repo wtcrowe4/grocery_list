@@ -46,9 +46,6 @@ const Header = () => {
                         </Nav.Link>
                         </>
                         )}
-                         {/* <Nav.Link className="nav-link" href="/dashboard">
-                             <FaList />Dashboard
-                         </Nav.Link> */}
                     </Nav>
                 </Navbar>
                 <p style={{fontSize: ".6em"}} >Make sure to sign out to protect your information.</p>

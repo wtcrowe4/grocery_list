@@ -29,44 +29,39 @@ app.use('/api/list', require('./routes/listRoutes'));
 
 //Error Handling
 app.use((err, req, res, next) => {  
+    
+    const status = err.status || 500;
+    const message = err.message || 'Something went wrong';
+    res.status(status).send(message);
     console.log(err);
-    return res.send({errMsg: err.message});
 });
 
 //Server
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
 //Email Service
+const host = process.env.MAIL_HOST
+const mail_port = process.env.MAIL_PORT
+const user = process.env.MAIL_USER
+const pass = process.env.MAIL_PASS
+
 app.post('/send_mail', cors(), async (req, res) => {
     const { email, item , subject } = req.body;
-    // const transporter = nodemailer.createTransport({
-    //     host: process.env.MAIL_HOST,
-    //     post: process.env.BE_PORT,
-    //     secure: false,
-    //     auth: {
-    //         user: process.env.MAIL_USER,
-    //         pass: process.env.PASSWORD
-    //     },
-    //     tls: {
-    //         rejectUnauthorized: false
-    //     }
-
-    // });
-    var transport = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
-        port: 2525,
+    const transport = nodemailer.createTransport({
+        host: host,
+        post: mail_port,
         secure: false,
         auth: {
-          user: "0cb5411844f59c",
-          pass: "7623d64c38032c"
+            user: user,
+            pass: pass 
         },
         tls: {
             rejectUnauthorized: false
         }
-        
-      });
-    
-      const list = item.map(item => {
+
+    });
+
+    const list = item.map(item => {
           return (  
                 `<ul>
                     <li>${item.text}</li>
