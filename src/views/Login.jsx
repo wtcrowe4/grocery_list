@@ -49,7 +49,7 @@ const Login = () => {
             <h1>Login</h1>
             <FaSignInAlt />
             <h3>Please sign in to your account</h3>
-            <form className="login-form">
+            <form className="register-form">
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input type="email"

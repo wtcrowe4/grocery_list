@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { user, message } = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.auth);
 
     return (
         <div className="App">
@@ -25,8 +25,11 @@ const Header = () => {
                                 <Nav.Link href="/lists"><FaList />My Lists</Nav.Link>
                                 <Nav.Link  onClick={() => {
                                     dispatch(logout());
-                                    toast.success('Logged out successfully');
                                     navigate('/');
+                                    
+                                    //state message is being read from login
+                                    //toast.success(message);
+                                    toast.success('Logged out successfully');
                                     dispatch(reset());
                                 }}><FaSignOutAlt />Logout</Nav.Link>
                             </>
@@ -48,6 +51,7 @@ const Header = () => {
                          </Nav.Link> */}
                     </Nav>
                 </Navbar>
+                <p style={{fontSize: ".6em"}} >Make sure to sign out to protect your information.</p>
             </header>
         </div>
     )
