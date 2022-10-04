@@ -1,6 +1,9 @@
 {
   "name": "grocery_list",
   "version": "0.1.0",
+  "engine": {
+    "node": "v18.6.0"
+  },
   "proxy": "http://localhost:8080",
   "private": true,
   "dependencies": {
@@ -15,6 +18,8 @@
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
+    "heroku-cli": "^7.0.9",
+    "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.2",
@@ -30,6 +35,7 @@
     "redux": "^4.2.0",
     "redux-toolkit": "^1.1.2",
     "web-vitals": "^2.1.4"
+  
   },
   "scripts": {
     "start": "react-scripts start",
