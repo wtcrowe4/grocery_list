@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
-const port = process.env.PORT || 443;
+const port = process.env.PORT || 80;
 const mongoose = require('mongoose');
 const mongoURI = process.env.MONGO_URI;
 const cors = require('cors');
@@ -36,8 +36,13 @@ app.use((err, req, res, next) => {
 });
 
 //Server
-app.listen(port, () => console.log(`Server running on port ${port}`));
-
+//app.listen(port, () => console.log(`Server running on port ${port}`));
+//Server for Heroku
+const server = app.listen(port, () => {
+    const host = server.address().address;
+    const port = server.address().port;
+    console.log(`Server running at http://${host}:${port}`);
+});
 
 
 
