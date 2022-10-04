@@ -211,3 +211,35 @@ div.spinner-border {
 .spinner-container {
   padding-bottom: 400px;
 }
+
+.Home {
+  padding: 0px 330px 0px 330px;
+  font-size: 25px;
+  font-weight: bolder;
+  color: darkgreen;
+  text-shadow: 2px 2px 2px whitesmoke;
+  font-family: copperplate;
+}
+
+.login-container {
+  font-weight: bolder;
+  color: rgb(152, 0, 0);
+  text-shadow: 2px 2px 2px whitesmoke;
+  font-family: copperplate;
+
+}
+
+button.btn-primary { 
+  background: #4da1ab;
+  border: 5px solid whitesmoke;
+  border-radius: 8px;
+  padding: 10px 20px;
+  color: whitesmoke;
+  font-family: copperplate; 
+  font-size: larger;
+  margin: 0 0 0 10px;
+}
+
+button.btn-primary:hover {
+  background-color: lightsalmon ;
+}
