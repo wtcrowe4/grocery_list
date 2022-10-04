@@ -3,7 +3,7 @@ const app = express();
 require('dotenv').config();
 const port = process.env.BE_PORT || 8080;
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb://localhost:27017/GroceryList';
+const mongoURI = process.env.MONGO_URI;
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 
