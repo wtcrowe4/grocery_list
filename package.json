@@ -34,8 +34,8 @@
     "react-toastify": "^9.0.8",
     "redux": "^4.2.0",
     "redux-toolkit": "^1.1.2",
+    "serve": "^14.0.1",
     "web-vitals": "^2.1.4"
-  
   },
   "scripts": {
     "start": "react-scripts start",
