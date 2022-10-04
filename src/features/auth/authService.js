@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const api_url = 'http://localhost:80/api/user';
+const api_url = 'http://:::80/api/user';
 
 //Register User
 const register = async (user) => {

@@ -71,7 +71,7 @@ function List() {
     console.log(item)
     const email = user.email || user.user.email;
     try{
-      const response = await axios.post('http://:::/send_mail', { email, subject , item});
+      const response = await axios.post('http://:::80/send_mail', { email, subject , item});
       console.log(response);
       setSent(true);
       console.log(sent)
