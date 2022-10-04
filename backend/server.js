@@ -36,13 +36,13 @@ app.use((err, req, res, next) => {
 });
 
 //Server
-app.listen(port, () => console.log(`Server running on port ${port}`));
+//app.listen(port, () => console.log(`Server running on port ${port}`));
 //Server for Heroku
-// const server = app.listen(port, () => {
-//     const host = server.address().address;
-//     const port = server.address().port;
-//     console.log(`Server running at http://${host}:${port}`);
-// });
+const server = app.listen(port, () => {
+    const host = server.address().address;
+    const port = server.address().port;
+    console.log(`Server running at http://${host}:${port}`);
+});
 
 
 
