@@ -10,6 +10,7 @@ const config = {
         baseURL: 'https://grocery-list-with-recipes.herokuapp.com',
         timeout: 1000,
     }
+    
 };
 
 const api_url = process.env.NODE_ENV === 'production' ? config.production.baseURL : config.development.baseURL;
@@ -18,7 +19,14 @@ const api_url = process.env.NODE_ENV === 'production' ? config.production.baseUR
 
 //Register User
 const register = async (user) => {
-    const response = await axios.post(`${api_url}/user/register`, user);
+    //only return json data
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const response = await axios.post(`${api_url}/api/user/register`, user, config);
     console.log(response)
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -30,7 +38,12 @@ const register = async (user) => {
 
 //Login User
 const login = async (user) => {
-    const response = await axios.post(`${api_url}/user/login`, user);
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const response = await axios.post(`${api_url}/api/user/login`, user, config);
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
         //sessionStorage.setItem('user', JSON.stringify(response.data));
