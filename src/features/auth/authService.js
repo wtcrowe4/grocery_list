@@ -19,11 +19,13 @@ const api_url = process.env.NODE_ENV === 'production' ? config.production.baseUR
 
 //Register User
 const register = async (user) => {
-    //only return json data
+    //make response json
+
     const config = {
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        response: 'json'
     };
 
     const response = await axios.post(`${api_url}/api/user/register`, user, config);
@@ -41,7 +43,8 @@ const login = async (user) => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        response: 'json'
     };
     const response = await axios.post(`${api_url}/api/user/login`, user, config);
     if (response.data) {
