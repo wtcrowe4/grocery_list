@@ -1,11 +1,24 @@
 import axios from 'axios';
 
+//Heroku Deployment
+const config = {
+    development: {
+        baseURL: 'http://localhost:80/api',
+        timeout: 1000,
+    },
+    production: {
+        baseURL: 'https://grocery-list-with-recipes.herokuapp.com',
+        timeout: 1000,
+    }
+};
 
-const api_url = 'http://:::80/api/user';
+const api_url = process.env.NODE_ENV === 'production' ? config.production.baseURL : config.development.baseURL;
+
+//const api_url = 'http://:::80/api/user';
 
 //Register User
 const register = async (user) => {
-    const response = await axios.post(`${api_url}/register`, user);
+    const response = await axios.post(`${api_url}/user/register`, user);
     console.log(response)
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
@@ -17,7 +30,7 @@ const register = async (user) => {
 
 //Login User
 const login = async (user) => {
-    const response = await axios.post(`${api_url}/login`, user);
+    const response = await axios.post(`${api_url}/user/login`, user);
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
         //sessionStorage.setItem('user', JSON.stringify(response.data));
