@@ -63,28 +63,20 @@ function List() {
   const { useSelector } = require("react-redux");
   const { user } = useSelector(state => state.auth);
   const [sent, setSent] = React.useState(false);
-  //const { email } = useSelector(state => state.auth.user.email);
-  //const [emailList, setEmailList] = React.useState([]);
-  
-  console.log(user)
   const subject = "Your List";
-  
   
   const handleSend = async (e) => {
     e.preventDefault();
-    
-    
     if (!user) return;
-    //setEmailList(item)
     console.log(item)
     const email = user.email || user.user.email;
-    console.log(email);
     try{
-    const response = await axios.post('http://localhost:8080/send_mail', { email, subject , item });
-    console.log(response);
-    setSent(true);
+      const response = await axios.post('http://localhost:8080/send_mail', { email, subject , item});
+      console.log(response);
+      setSent(true);
+      console.log(sent)
     } catch (error) {
-      console.log(error);
+       console.log(error);
     }
   };
   

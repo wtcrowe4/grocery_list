@@ -8,7 +8,8 @@ const register = async (user) => {
     console.log(response)
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
-        //using session storage creates issues using navigate
+        //using session storage creates issues with thunk
+        //sessionStorage.setItem('user', JSON.stringify(response.data));
     }
     return response.data;
 };
@@ -18,6 +19,7 @@ const login = async (user) => {
     const response = await axios.post(`${api_url}/login`, user);
     if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
+        //sessionStorage.setItem('user', JSON.stringify(response.data));
     }
     return response.data;
 };
@@ -25,6 +27,7 @@ const login = async (user) => {
 //Logout User
 const logout = () => {
     localStorage.removeItem('user');
+    //sessionStorage.removeItem('user');
 };
 
 const authService = {
