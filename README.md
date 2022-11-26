@@ -41,13 +41,12 @@ Coming soon.
 - Database on Heroku is not working properly
 - Need to move API key to the .env file
 
-### API
-**EDAMAM Recipe Search API**
----
-*Documentation: https://developer.edamam.com/edamam-docs-recipe-api*
----
-*URL: https://api.edamam.com/search?q=""*
----
+## EDAMAM Recipe Search API
+
+### *Documentation: https://developer.edamam.com/edamam-docs-recipe-api*
+
+### *URL: https://api.edamam.com/search?q=""*
+
 There is now a version 2 that has been released.  I will be updating the app to use this version in the future.
 
 ### Security
