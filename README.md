@@ -81,17 +81,17 @@ There is now a version 2 that has been released.  I will be updating the app to 
 - /lists - Lists
 - /dashboard/:id - Saved List Dashboard
 
-### Change Log
-1.0.0 - Initial release
-1.0.1 - Recipe search is now working
-1.0.2 - Added a quick grocery list to the dashboard
-1.0.3 - Added user login and registration
-1.0.4 - Added the ability to e-mail list to yourself
-1.0.5 - Added README.md
+## Change Log
+### 1.0.0 - Initial release
+### 1.0.1 - Recipe search is now working
+### 1.0.2 - Added a quick grocery list to the dashboard
+### 1.0.3 - Added user login and registration
+### 1.0.4 - Added the ability to e-mail list to yourself
+### 1.0.5 - Added README.md
 
-** Coming Soon **
-1.0.5 - Adding CRUD functionality to lists saved to your account
-1.0.6 - Adding a TypeScript version of the app
+## ** Coming Soon **
+### 1.0.5 - Adding CRUD functionality to lists saved to your account
+### 1.0.6 - Adding a TypeScript version of the app
 
 ### Authors
 - **Thomas Crowe** - [Github](www.github.com/wtcrowe4)
