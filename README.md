@@ -43,8 +43,11 @@ Coming soon.
 
 ### API
 **EDAMAM Recipe Search API**
+---
 *Documentation: https://developer.edamam.com/edamam-docs-recipe-api*
+---
 *URL: https://api.edamam.com/search?q=""*
+---
 There is now a version 2 that has been released.  I will be updating the app to use this version in the future.
 
 ### Security
