@@ -24,7 +24,7 @@ const Register = () => {
             toast.error(message);
             console.log(status)
             dispatch(reset());
-            
+            navigate('/register', { replace: true });
         }
         if (user) {
             toast.success(message);

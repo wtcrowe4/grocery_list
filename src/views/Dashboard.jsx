@@ -40,7 +40,7 @@ const Dashboard = () => {
         <div className="dashboard-container">
         <h1>Dashboard</h1>
         <h2>Welcome {user.username ? user.username : user.user.username}!</h2>
-        
+        <h3>Make a quick list and e-mail it to yourself.</h3>
         <div className="dashboard-content">
             <div className="dashboard-list">
                 <List />

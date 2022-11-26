@@ -19,8 +19,9 @@ const register = asyncHandler(async (req, res) => {
     }
     
     //Something is wrong here
-    const userExists = await User.findOne({ email })
-    if(userExists) {
+    const emailExists = await User.findOne({ email });
+    const usernameExists = await User.findOne({ username });
+    if(usernameExists || emailExists) {
         res.status(400)
         throw new Error('User already exists');
     }
