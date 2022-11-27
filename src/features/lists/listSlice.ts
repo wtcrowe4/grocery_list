@@ -11,9 +11,11 @@ const initialState = {
 export const createList = createAsyncThunk('list/create',
     async (list, thunkAPI) => {
         try {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const token = thunkAPI.getState().auth.user.user.token;
             return await listService.create(list, token);
         } catch (error) {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
@@ -23,9 +25,11 @@ export const createList = createAsyncThunk('list/create',
 export const getMyLists = createAsyncThunk('list/all',
     async (userId, thunkAPI) => {
         try {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const token = thunkAPI.getState().auth.user.user.token;
             return await listService.all(token, userId);
         } catch (error) {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             return thunkAPI.rejectWithValue(message);
         }
@@ -35,9 +39,11 @@ export const getMyLists = createAsyncThunk('list/all',
 export const deleteList = createAsyncThunk('list/delete',
     async (listId, thunkAPI) => {
         try {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const token = thunkAPI.getState().auth.user.user.token;
             return await listService.deleteList(listId, token);
         } catch (error) {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             return thunkAPI.rejectWithValue(message);
         }
@@ -47,9 +53,11 @@ export const deleteList = createAsyncThunk('list/delete',
 export const getOneList = createAsyncThunk('list/get',
     async (listId, thunkAPI) => {
         try {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const token = thunkAPI.getState().auth.user.user.token;
             return await listService.get(listId, token);
         } catch (error) {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             return thunkAPI.rejectWithValue(message);
         }
@@ -59,9 +67,11 @@ export const getOneList = createAsyncThunk('list/get',
 export const addItem = createAsyncThunk(`list/addItem`,
     async (item, thunkAPI) => {
         try {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const token = thunkAPI.getState().auth.user.user.token;
             return await listService.addItem(item, token);
         } catch (error) {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             return thunkAPI.rejectWithValue(message);
         }
@@ -71,9 +81,11 @@ export const addItem = createAsyncThunk(`list/addItem`,
 export const updateList = createAsyncThunk(`list/update`,
     async (list, thunkAPI) => {
         try {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const token = thunkAPI.getState().auth.user.user.token;
             return await listService.update(list, token);
         } catch (error) {
+            // @ts-expect-error TS(2571): Object is of type 'unknown'.
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             return thunkAPI.rejectWithValue(message);
         }
@@ -104,11 +116,13 @@ export const listSlice = createSlice({
             .addCase(createList.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.error = null;
+                // @ts-expect-error TS(2345): Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
                 state.lists.push(action.payload);
                 state.message = 'List created';
             })
             .addCase(createList.rejected, (state, action) => {
                 state.status = 'failed';
+                // @ts-expect-error TS(2322): Type 'true' is not assignable to type 'null'.
                 state.error = true;
                 state.message = 'List creation failed';
             })
@@ -125,6 +139,7 @@ export const listSlice = createSlice({
             })
             .addCase(getMyLists.rejected, (state, action) => {
                 state.status = 'failed';
+                // @ts-expect-error TS(2571): Object is of type 'unknown'.
                 state.error = action.payload.message;
                 state.message = 'Lists retrieval failed';
             })
@@ -141,6 +156,7 @@ export const listSlice = createSlice({
             })
             .addCase(getOneList.rejected, (state, action) => {
                 state.status = 'failed';
+                // @ts-expect-error TS(2571): Object is of type 'unknown'.
                 state.error = action.payload.message;
                 state.message = 'List retrieval failed';
             })
@@ -152,11 +168,13 @@ export const listSlice = createSlice({
             .addCase(addItem.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.error = null;
+                // @ts-expect-error TS(2339): Property 'items' does not exist on type 'never[]'.
                 state.lists.items.push(action.payload);
                 state.message = 'List updated';
             })
             .addCase(addItem.rejected, (state, action) => {
                 state.status = 'failed';
+                // @ts-expect-error TS(2571): Object is of type 'unknown'.
                 state.error = action.payload.message;
                 state.message = 'List update failed';
             })
@@ -168,11 +186,13 @@ export const listSlice = createSlice({
             .addCase(deleteList.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.error = null;
+                // @ts-expect-error TS(2339): Property '_id' does not exist on type 'never'.
                 state.lists = state.lists.filter(list => list._id !== action.payload.id);
                 state.message = 'List removed';
             })
             .addCase(deleteList.rejected, (state, action) => {
                 state.status = 'failed';
+                // @ts-expect-error TS(2571): Object is of type 'unknown'.
                 state.error = action.payload.message;
                 state.message = 'List removal failed';
             })

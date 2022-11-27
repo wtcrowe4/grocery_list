@@ -9,6 +9,7 @@ const SavedList = () => {
     const dispatch = useDispatch();
     const listId = window.location.pathname.split('/')[2];
     
+    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     const { lists } = useSelector(state => state.lists ? state.lists : null);
     
     const [listItems, setListItems] = useState(lists.items ? lists.items : []);
@@ -16,16 +17,17 @@ const SavedList = () => {
 
    
 
-    const onChange = (e) => {
+    const onChange = (e: any) => {
         e.preventDefault();
         setItem(e.target.value);
 
     //    console.log(listItems);
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: any) => {
         e.preventDefault();
         //add list item to list
+        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any, void, {}>'... Remove this comment to see the full error message
         dispatch(updateList(listId));
         //push item to redux state and database
         //setListItems([...listItems, item]);        
@@ -40,6 +42,7 @@ const SavedList = () => {
     }
 
     useEffect(() => {
+        // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any, void, {}>'... Remove this comment to see the full error message
         dispatch(getOneList(listId));
         
     }, [dispatch, listId])
@@ -49,15 +52,18 @@ const SavedList = () => {
     const renderList = () => {
   
               if (lists.items && lists.items.length > 0) {
-            return lists.items.map(item => {
+            return lists.items.map((item: any) => {
                 return (
+                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <ul className="saved-list">
+                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <li key={item}>{item}
+                            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                             <button className="btn-sm" onClick={e=>console.log(e)}>x</button>
                         </li>
                     </ul>
                 )
-            })
+            });
             
         }
      }
@@ -66,11 +72,15 @@ const SavedList = () => {
 
   
     return (
+    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div className="saved-list">
+             // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
              <h1>{lists.title}</h1>
              
              {renderList()}
+             // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
              <form onSubmit={onSubmit}>
+                 // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                  <input type="text"
                      placeholder="List Item"
                      name="listItem"
@@ -78,10 +88,12 @@ const SavedList = () => {
                      onChange={onChange}
                      required
                  />
+                 // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                  <input type="submit" className="btn btn-primary" value="Add Item" />
              </form>
                 
                 {/* Save button to run updateList function */}
+                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <button className="btn btn-primary">Save</button>
                 
                 

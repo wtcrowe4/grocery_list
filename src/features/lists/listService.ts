@@ -3,7 +3,7 @@ import axios from 'axios';
 const api_url = 'http://localhost:8080/api/list';
 
 //Create a new list
-const create = async (list, token) => {
+const create = async (list: any, token: any) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -14,7 +14,7 @@ const create = async (list, token) => {
 };
 
 //Get all lists
-const all = async (token, userId) => {
+const all = async (token: any, userId: any) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -34,7 +34,7 @@ const all = async (token, userId) => {
     
 
 //Get a list
-const get = async (listId, token) => {
+const get = async (listId: any, token: any) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -46,7 +46,7 @@ const get = async (listId, token) => {
 
 
 //Delete a list
-const deleteList = async (listId, token) => {
+const deleteList = async (listId: any, token: any) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -60,7 +60,7 @@ const deleteList = async (listId, token) => {
 };
 
 //Add an item to a list
-const addItem = async (item, token) => {
+const addItem = async (item: any, token: any) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -71,7 +71,7 @@ const addItem = async (item, token) => {
 };
 
 //Update
-const update = async (list, token) => {
+const update = async (list: any, token: any) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
