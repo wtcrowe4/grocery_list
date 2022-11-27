@@ -54,11 +54,8 @@ const SavedList = () => {
               if (lists.items && lists.items.length > 0) {
             return lists.items.map((item: any) => {
                 return (
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <ul className="saved-list">
-                        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                         <li key={item}>{item}
-                            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                             <button className="btn-sm" onClick={e=>console.log(e)}>x</button>
                         </li>
                     </ul>
@@ -72,15 +69,11 @@ const SavedList = () => {
 
   
     return (
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <div className="saved-list">
-             // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
              <h1>{lists.title}</h1>
              
              {renderList()}
-             // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
              <form onSubmit={onSubmit}>
-                 // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                  <input type="text"
                      placeholder="List Item"
                      name="listItem"
@@ -88,12 +81,10 @@ const SavedList = () => {
                      onChange={onChange}
                      required
                  />
-                 // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                  <input type="submit" className="btn btn-primary" value="Add Item" />
              </form>
                 
                 {/* Save button to run updateList function */}
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <button className="btn btn-primary">Save</button>
                 
                 

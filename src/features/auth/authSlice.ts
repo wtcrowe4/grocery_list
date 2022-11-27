@@ -2,8 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from './authService';
 
 
-
-// @ts-expect-error TS(2345): Argument of type 'string | null' is not assignable... Remove this comment to see the full error message
 const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
@@ -18,7 +16,6 @@ export const register = createAsyncThunk('/auth/register', async (user, thunkAPI
     try {
         return authService.register(user);
     } catch (error) {
-        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -28,7 +25,6 @@ export const login = createAsyncThunk('/auth/login', async (user, thunkAPI) => {
     try {
         return await authService.login(user);
     } catch (error) {
-        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -40,7 +36,6 @@ export const logout = createAsyncThunk('/auth/logout', async (user, thunkAPI) =>
         return await authService.logout(user);
         
     } catch (error) {
-        // @ts-expect-error TS(2571): Object is of type 'unknown'.
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -67,7 +62,6 @@ export const authSlice = createSlice({
             })
             .addCase(register.rejected, (state, action) => {
                 state.status = 'failed';
-                // @ts-expect-error TS(2322): Type 'true' is not assignable to type 'null'.
                 state.error = true;
                 state.user = null;
                 state.message = 'Registration Failed';
@@ -86,7 +80,6 @@ export const authSlice = createSlice({
             })
             .addCase(login.rejected, (state, action) => {
                 state.status = 'failed';
-                // @ts-expect-error TS(2571): Object is of type 'unknown'.
                 state.error = action.payload.message;
                 state.user = null;
                 state.message = 'Login Failed';

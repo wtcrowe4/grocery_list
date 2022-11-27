@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register, reset } from '../features/auth/authSlice';
-// @ts-expect-error TS(6142): Module '../components/Spinner' was resolved to 'C:... Remove this comment to see the full error message
 import Spinner from '../components/Spinner';
+import React from 'react';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -17,7 +17,6 @@ const Register = () => {
     const { password, password2 } = formData
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // @ts-expect-error TS(2571): Object is of type 'unknown'.
     const{ user, status, error, message } = useSelector(state => state.auth);
 
     useEffect(() => {
@@ -48,33 +47,23 @@ const Register = () => {
         } else {
             const newUser = formData;
             console.log(newUser);
-            // @ts-expect-error TS(2345): Argument of type 'AsyncThunkAction<any, void, {}>'... Remove this comment to see the full error message
             dispatch(register(newUser));
         }
     };
 
     if(status === 'loading') {
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         return <Spinner />
     }
 
     
     return (
-        // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
         <div className="register-container">
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <h1>Register</h1>
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <FaUser />
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <h3>Please create an account</h3>
-            // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
             <form className="register-form" onSubmit={onSubmit}>
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div className="form-group">
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <label htmlFor="username">Username</label>
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <input type="text" 
                         className="form-control" 
                         id="username" 
@@ -82,11 +71,8 @@ const Register = () => {
                         onChange={e => onChange(e)}
                     />
                 </div>
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div className="form-group">
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <label htmlFor="email">Email</label>
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <input type="email" 
                         className="form-control" 
                         id="email" 
@@ -94,11 +80,8 @@ const Register = () => {
                         onChange={e => onChange(e)} 
                     />
                 </div>
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div className="form-group">
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <label htmlFor="password">Password</label>
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -106,11 +89,8 @@ const Register = () => {
                         onChange={e => onChange(e)} 
                     />
                 </div>
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div className="form-group">    
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <label htmlFor="password2">Confirm Password</label>
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <input type="password" 
                         className="form-control" 
                         id="password2" 
@@ -118,9 +98,7 @@ const Register = () => {
                         onChange={e => onChange(e)} 
                     />
                 </div>
-                // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                 <div className="form-group">
-                    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
                     <button type="submit" className="btn-block">Submit</button>
                 </div>
             </form>    
