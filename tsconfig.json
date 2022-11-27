@@ -4,6 +4,7 @@
     "outDir": "./built",
     "rootDir": "./src",
     "allowJs": true,
+    "jsx": "react",
     
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
