@@ -7,14 +7,11 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 //serviceWorker.unregister();
 
-// @ts-expect-error TS(2345): Argument of type 'HTMLElement | null' is not assig... Remove this comment to see the full error message
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
   <React.StrictMode>
-    // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
     <Provider store={store}>
-      // @ts-expect-error TS(17004): Cannot use JSX unless the '--jsx' flag is provided... Remove this comment to see the full error message
       <App />
     </Provider>
   </React.StrictMode>
