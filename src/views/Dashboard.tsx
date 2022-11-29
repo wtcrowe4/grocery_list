@@ -6,13 +6,16 @@ import Recipes from '../components/Recipes';
 import List from '../components/List';
 import { getOneList } from '../features/lists/listSlice';
 
-
+interface State {
+    lists: any;
+    auth: any;
+}
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.auth ? state.auth : null);
-    const { lists } = useSelector(state => state.lists ? state.lists : null);
+    const { user } = useSelector((state: State) => state.auth ? state.auth : null);
+    const { lists } = useSelector((state: State) => state.lists ? state.lists : null);
     
     useEffect(() => {
         document.title = 'Dashboard';
