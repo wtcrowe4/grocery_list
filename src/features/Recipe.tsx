@@ -16,7 +16,7 @@ const recipeStyle: any = {
     justifyContent: "space-around",
     minWidth: "20vh",
     backgroundColor: "whitesmoke",
-    backgroundImage: "url('/src/css/secondRecipeBackground.jpg')",
+    //backgroundImage: '/src/css/secondRecipeBackground.jpg',
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     borderRadius: "10px",

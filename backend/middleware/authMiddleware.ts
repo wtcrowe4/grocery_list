@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
-const asyncHandler = require('express-async-handler');
-const User = require('../models/userModel');
+ import asyncHandler from 'express-async-handler';
+ const jwt = require('jsonwebtoken');
+ const User = require('../models/userModel');
 
 //Protect Routes
-const protect = asyncHandler(async (req, res, next) => {
+const protect = asyncHandler(async (req: any, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
