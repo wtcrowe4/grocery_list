@@ -8,11 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
+interface State {
+    auth: {
+        user: any;
+    }
+}
+
+
 const Header = () => {
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
     const navigate = useNavigate();
-    // @ts-expect-error TS(2571): Object is of type 'unknown'.
-    const { user } = useSelector(state => state.auth);
+    
+    const { user } = useSelector((state: State) => state.auth);
 
     return (
         <div className="App">
@@ -25,7 +32,7 @@ const Header = () => {
                                 <Nav.Link href="/dashboard"><FaHome />My Home</Nav.Link>
                                 <Nav.Link href="/lists"><FaList />My Lists</Nav.Link>
                                 <Nav.Link  onClick={() => {
-                                    dispatch(logout());
+                                    dispatch(logout(user));
                                     navigate('/');
                                     
                                     //state message is being read from login

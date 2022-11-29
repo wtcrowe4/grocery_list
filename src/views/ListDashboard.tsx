@@ -7,11 +7,17 @@ import SavedList from '../components/SavedList';
 import React from 'react';
 //import { getOneList } from '../features/lists/listSlice';
 
+interface State {
+    lists: any;
+    auth: any;
+}
+    
+
 
 const ListDashboard = () => {
     const navigate = useNavigate();
     //const dispatch = useDispatch();
-    const { user } = useSelector(state => state.auth ? state.auth : null);
+    const { user } = useSelector((state: State) => state.auth ? state.auth : null);
     //const { lists } = useSelector(state => state.lists ? state.lists : null);
     
     useEffect(() => {

@@ -7,14 +7,19 @@ import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import React from 'react';
 
+interface State {
+    lists: any;
+    auth: any;
+}
+
 const Login = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { user, status, error, message } = useSelector(state => state.auth);
+    const dispatch: any = useDispatch();
+    const { user, status, error, message } = useSelector((state: State) => state.auth);
 
     useEffect(() => {
         document.title = 'Login';

@@ -7,6 +7,16 @@ import { register, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import React from 'react';
 
+interface State {
+    auth: {
+        user: any;
+        status: string;
+        error: boolean;
+        message: string;
+    }
+}
+
+
 const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
@@ -16,8 +26,8 @@ const Register = () => {
     });
     const { password, password2 } = formData
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const{ user, status, error, message } = useSelector(state => state.auth);
+    const dispatch: any = useDispatch();
+    const{ user, status, error, message } = useSelector((state: State) => state.auth);
 
     useEffect(() => {
         document.title = 'Register';
@@ -45,7 +55,7 @@ const Register = () => {
             console.log('Passwords do not match');
             dispatch(reset());
         } else {
-            const newUser = formData;
+            const newUser: any = formData;
             console.log(newUser);
             dispatch(register(newUser));
         }

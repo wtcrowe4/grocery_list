@@ -1,8 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import { Action } from '@remix-run/router';
 import authService from './authService';
 
 
 const user = JSON.parse(localStorage.getItem('user'));
+
+interface User {
+    user: {
+        id: string,
+        username: string,
+        email: string,
+        token: string
+    }
+}
+
+interface State {
+    status: string,
+    error: boolean,
+    user: User,
+    message: string
+}
+
+interface Action {
+    type: string,
+    payload: any
+}
 
 const initialState = {
     status: 'idle',
@@ -12,7 +34,7 @@ const initialState = {
 };
 
 //Register User
-export const register = createAsyncThunk('/auth/register', async (user, thunkAPI) => {
+export const register = createAsyncThunk('/auth/register', async (user: any, thunkAPI) => {
     try {
         return authService.register(user);
     } catch (error) {
@@ -21,7 +43,7 @@ export const register = createAsyncThunk('/auth/register', async (user, thunkAPI
 });
 
 //Login User
-export const login = createAsyncThunk('/auth/login', async (user, thunkAPI) => {
+export const login = createAsyncThunk('/auth/login', async (user: any, thunkAPI) => {
     try {
         return await authService.login(user);
     } catch (error) {
@@ -30,10 +52,9 @@ export const login = createAsyncThunk('/auth/login', async (user, thunkAPI) => {
 });
 
 //Logout User
-export const logout = createAsyncThunk('/auth/logout', async (user, thunkAPI) => {
+export const logout = createAsyncThunk('/auth/logout', async (thunkAPI: any) => {
     try {
-        // @ts-expect-error TS(2554): Expected 0 arguments, but got 1.
-        return await authService.logout(user);
+        return await authService.logout();
         
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
@@ -45,7 +66,7 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        reset: (state) => {
+        reset: (state: State) => {
             state.status = 'idle';
             state.error = null;
             state.user = null;
@@ -54,56 +75,55 @@ export const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(register.fulfilled, (state, action) => {
+            .addCase(register.fulfilled, (state: State, action: Action) => {
                 state.status = 'succeeded';
                 state.error = null;
                 state.user = action.payload;
                 state.message = 'Registration Successful';
             })
-            .addCase(register.rejected, (state, action) => {
+            .addCase(register.rejected, (state: State) => {
                 state.status = 'failed';
                 state.error = true;
                 state.user = null;
                 state.message = 'Registration Failed';
             })
-            .addCase(register.pending, (state) => {
+            .addCase(register.pending, (state: State) => {
                 state.status = 'loading';
                 state.error = null;
                 state.user = null;
                 state.message = 'Registering User';
             })
-            .addCase(login.fulfilled, (state, action) => {
+            .addCase(login.fulfilled, (state: State, action: Action) => {
                 state.status = 'succeeded';
                 state.error = null;
                 state.user = action.payload;
                 state.message = 'Login Successful';
             })
-            .addCase(login.rejected, (state, action) => {
+            .addCase(login.rejected, (state: State, action: Action) => {
                 state.status = 'failed';
                 state.error = action.payload.message;
                 state.user = null;
                 state.message = 'Login Failed';
             })
-            .addCase(login.pending, (state) => {
+            .addCase(login.pending, (state: State) => {
                 state.status = 'loading';
                 state.error = null;
                 state.user = null;
                 state.message = 'Logging In';
             })
-            .addCase(logout.fulfilled, (state) => {
+            .addCase(logout.fulfilled, (state: State) => {
                 state.status = 'succeeded';
                 state.error = null;
                 state.user = null;
                 state.message = 'Logout Successful';
             })
-            .addCase(logout.rejected, (state, action) => {
+            .addCase(logout.rejected, (state: State, action: Action) => {
                 state.status = 'failed';
-                // @ts-expect-error TS(2571): Object is of type 'unknown'.
                 state.error = action.payload.message;
                 state.user = null;
                 state.message = 'Logout Failed';
             })
-            .addCase(logout.pending, (state, action) => {
+            .addCase(logout.pending, (state: State, action: Action) => {
                 state.status = 'loading';
                 state.error = null;
                 state.user = null;

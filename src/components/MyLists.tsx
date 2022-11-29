@@ -5,13 +5,18 @@ import { useNavigate } from 'react-router-dom';
 //import listSlice from '../features/lists/listSlice';
 import { createList, getMyLists, deleteList } from '../features/lists/listSlice';
 
+interface State {
+    lists: any;
+    auth: any;
+}
+
 
 const MyLists = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch: any = useDispatch();
     // const { user } = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null;
-    const user = useSelector(state => state.auth ? state.auth : null);
-    const lists = useSelector(state => state.lists);
+    const user = useSelector((state: State) => state.auth ? state.auth : null);
+    const lists = useSelector((state: State) => state.lists);
     //const [myLists, setMyLists] = useState([])
     
     const [listName, setListName] = useState('');
@@ -25,16 +30,6 @@ const MyLists = () => {
         
         dispatch(getMyLists(user._id));
         
-       
-
-         
-        
- 
-    
-    
-    
-    
-    
     }, [user, navigate, dispatch]);
 
     
@@ -52,7 +47,7 @@ const MyLists = () => {
 
     const onSubmit = (e: any) => {
         e.preventDefault();
-        const newList = {
+        const newList: any = {
             title: listName,
             userId: user.user.user._id
         }
